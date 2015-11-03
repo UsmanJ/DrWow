@@ -25,6 +25,7 @@
     "phantomjs": "^1.9.18"
   },
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "opentok": "^2.3.0"
   }
 }

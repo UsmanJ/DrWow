@@ -6,20 +6,23 @@ var bodyParser = require('body-parser');
 var storage = require('storage');
 var port = process.env.PORT || 8080;
 
-var OTKEY = process.env.apiKey
-
-
-var sessionId;
-opentok.createSession(function(err, session) {
-  if (err) return console.log(err);
-
-  // save the sessionId
-  // db.save('session', session.sessionId, done);
-});
-
-
 app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+var sessionId;
+
+app.get('/session', function(req, res) {
+  opentok.createSession(function(err, session) {
+    if (err) return console.log(err);
+  token = session.generateToken();
+    // save the sessionId
+    // db.save('session', session.sessionId, done);
+   res.json({ session: session, token: token });
+  });
+});
+
 
 app.get('/', function(req, res) {
     res.sendfile('index.html');

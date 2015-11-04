@@ -1,7 +1,5 @@
-drWow.controller('DrCtrl', function() {
+drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', 'sessionId', 'token', function($scope, OTSession, apiKey, sessionId, token) {
   var self = this;
-  this.webChat = false;
-
 
   self.joinCall = function(){
     var apiKey = "45396692"
@@ -14,42 +12,14 @@ drWow.controller('DrCtrl', function() {
         alert("there is an error!");
       }else{
         session.publish();
-        this.webChat = true;
       }
     });
     session.on("streamCreated", function(event){
       session.subscribe( event.stream );
     });
   }
-//   self.joinCall = function() {
-//     var OpenTok = require('opentok'),
-//         opentok = new opentok.OpenTok(API_KEY, API_SECRET);
-//     var sessionId;
-//     opentok.createSession(null, {mediaMode:"routed"}, function(error, session) {
-//       if (error) {
-//         console.log("Error creating session:", error)
-//       } else {
-//         sessionId = session.sessionId;
-//         console.log("Session ID: " + sessionId);
-//       }
-//     });
-//
-//     var token
-//     opentok.createSession({}, function(error, session) {
-//       if (error) {
-//         console.log("Error creating session:", error)
-//       } else {
-//         sessionId = session.sessionId;
-//         console.log("Session ID: " + sessionId);
-//         //  Use the role value appropriate for the user:
-//         var tokenOptions = {};
-//         tokenOptions.role = "publisher";
-//         tokenOptions.data = "username=bob";
-//
-//         // Generate a token.
-//         token = opentok.generateToken(sessionId, tokenOptions);
-//         console.log(token);
-//       };
-//   });
-// };
+}]).value({
+    apiKey: '4539669',
+    sessionId: 'REPLACE_WITH_YOUR_SESSION_ID',
+    token: 'REPLACE_WITH_YOUR_TOKEN'
 });

@@ -25,7 +25,9 @@
     "phantomjs": "^1.9.18"
   },
   "dependencies": {
+    "body-parser": "^1.14.1",
     "express": "^4.13.3",
-    "opentok": "^2.3.0"
+    "opentok": "^2.3.0",
+    "storage": "^0.2.0"
   }
 }

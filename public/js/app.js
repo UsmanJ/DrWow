@@ -1,1 +1,1 @@
-var drWow = angular.module('DrWow', ['ngResource']);
+var drWow = angular.module('DrWow', ['ngResource', 'opentok']);

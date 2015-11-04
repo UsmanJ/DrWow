@@ -34,7 +34,11 @@
     <h2>Hello </h2>
 
     <div ng-controller="DrCtrl as dr">
-      <button class="button button-full button-dark" ng-click="dr.joinCall()" ng-hide="dr.webChat">Join Call</button>
+      <button class="button button-full button-dark" ng-click="dr.createSession()">Create Call</button>
+      <form name="sessionId">
+        <input type="text" placeholder="SessionId" ng-model="dr.sessionId" required/>
+        <button class="button button-full button-dark" ng-click="dr.joinSession()" ng-disabled="sessionId.$invalid">Join Call</button>
+      </form>
     </div>
   </body>
 </html>

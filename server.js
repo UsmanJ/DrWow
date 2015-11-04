@@ -11,9 +11,7 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var sessionId;
-
-app.get('/session', function(req, res) {
+app.get('/createSession', function(req, res) {
   opentok.createSession(function(err, session) {
     if (err) return console.log(err);
   token = session.generateToken();
@@ -23,6 +21,16 @@ app.get('/session', function(req, res) {
   });
 });
 
+app.post('/session', function(req, res) {
+
+});
+
+app.get('/joinSession', function(req, res) {
+  token = session.generateToken();
+    // save the sessionId
+    // db.save('session', session.sessionId, done);
+   res.json({ session: session, token: token });
+});
 
 app.get('/', function(req, res) {
     res.sendfile('index.html');

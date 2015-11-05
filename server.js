@@ -228,6 +228,14 @@ app.get('/', function(req, res) {
     res.sendfile('index.html');
 });
 
+app.get('/createSession', function(req, res) {
+    res.sendfile('/public/createSession.html');
+});
+
+app.get('/joinSession', function(req, res) {
+    res.sendfile('/public/joinSession.html');
+});
+
 app.listen(port, function() {
   console.log('Our app is running on http://localhost:' + port);
 });

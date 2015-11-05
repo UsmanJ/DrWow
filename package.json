@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "body-parser": "^1.14.1",
+    "bower": "1.6.3",
     "express": "^4.13.3",
     "opentok": "^2.3.0",
     "storage": "^0.2.0"

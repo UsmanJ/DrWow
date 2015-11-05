@@ -4,7 +4,9 @@
   "description": "",
   "main": "controller.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,10 @@
     "phantomjs": "^1.9.18"
   },
   "dependencies": {
-    "express": "^4.13.3"
+    "body-parser": "^1.14.1",
+    "bower": "1.6.3",
+    "express": "^4.13.3",
+    "opentok": "^2.3.0",
+    "storage": "^0.2.0"
   }
 }

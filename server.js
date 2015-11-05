@@ -2,9 +2,14 @@ var express = require('express');
 var OpenTok = require('opentok'),
     opentok = new OpenTok(process.env.apiKey,process.env.apiSecret);
 var app = express();
+var passport = require('passport')
+var flash = require('connect-flash')
+var morgan = require('morgan')
+var cookieparser = require('cookie-parser')
 var bodyParser = require('body-parser');
 var storage = require('storage');
 var port = process.env.PORT || 8080;
+var session = require('express-session')
 var self = this;
 var sessionObj = null;
 
@@ -12,6 +17,24 @@ app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
+// set up authentication
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); // get information from html forms
+
+app.set('view engine', 'ejs'); // set up ejs for templating
+
+// required for passport
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+
+
+
 
 app.get('/createSession', function(req, res) {
   opentok.createSession(function(err, session) {
@@ -218,6 +241,8 @@ router.route('/consultations/:consultation_id')
       res.json({ message: 'Successfully deleted' });
     });
   });
+
+
 
 
 // REGISTER OUR ROUTES -------------------------------

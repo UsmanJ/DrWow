@@ -4,7 +4,7 @@ drWow.controller('apiCtrl', function($http) {
 
  self.getUsers = function(){
    console.log("getUsers function called")
-   $http({method: 'GET', url: 'http://drwow-54498.onmodulus.net/api/users'})
+   $http({method: 'GET', url: 'http://drwhoteam.herokuapp.com/api/users'})
    .then(function successCallback(responseData) {
      console.log(responseData)
    }, function errorCallback(response) {
@@ -16,7 +16,7 @@ drWow.controller('apiCtrl', function($http) {
    console.log("postUser function called")
    console.log(nameInput)
 
-   $http({method: 'POST', url: 'http://drwow-54498.onmodulus.net/api/users', data: {"name":nameInput}})
+   $http({method: 'POST', url: 'http://drwhoteam.herokuapp.com/api/users', data: {"name":nameInput}})
    .then(function successCallback(response) {
      console.log("user added")
    }, function errorCallback(response) {

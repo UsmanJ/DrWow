@@ -42,7 +42,7 @@ app.get('/joinSession', function(req, res) {
 
 
 var mongoose = require('mongoose');
-db = mongoose.connect('mongodb://<user>:<password>@ds049864.mongolab.com:49864/drwow'); // connect to our database
+db = mongoose.connect('mongodb://'+ process.env.user + ':' + process.env.password + '@ds049864.mongolab.com:49864/drwow'); // connect to our database
 //modulus 'mongodb://alexlemons1:modulus@apollo.modulusmongo.net:27017/vebEb2ex'
 
 console.log(db)

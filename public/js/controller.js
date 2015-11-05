@@ -52,6 +52,8 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
    session.connect( response.data.token, function(err) {
      if(err){
        alert("there is an error!");
+     }else if (connectionCount === 2){
+       alert("already two people in this session!");
      }else{
        console.log('You have connected to the session.');
        session.publish();
@@ -60,53 +62,28 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
    session.on("streamCreated", function(event){
     session.subscribe( event.stream );
   });
-   session.on({
-     connectionCreated: function (event) {
-       connectionCount++;
-       console.log(connectionCount + ' connections.');
-     },
-     connectionDestroyed: function (event) {
-       connectionCount--;
-       console.log(connectionCount + ' connections.');
-     },
-     sessionDisconnected: function sessionDisconnectHandler(event) {
-       // The event is defined by the SessionDisconnectEvent class
-       console.log('Disconnected from the session.');
-       if (event.reason == 'networkDisconnected') {
-         alert('Your network connection terminated.')
-       }
-     }
-   });
+  //  session.on({
+  //    connectionCreated: function (event) {
+  //      connectionCount++;
+  //      console.log(connectionCount + ' connections.');
+  //    },
+  //    connectionDestroyed: function (event) {
+  //      connectionCount--;
+  //      console.log(connectionCount + ' connections.');
+  //    },
+  //    sessionDisconnected: function sessionDisconnectHandler(event) {
+  //      // The event is defined by the SessionDisconnectEvent class
+  //      console.log('Disconnected from the session.');
+  //      if (event.reason == 'networkDisconnected') {
+  //        alert('Your network connection terminated.')
+  //      }
+  //    }
+  //  });
    }, function errorCallback(response) {
      // called asynchronously if an error occurs
      // or server returns response with an error status.
    });
 };
-
-
-
-
-// session.on({
-//   connectionCreated: function (event) {
-//     connectionCount++;
-//     if (event.connection.connectionId != session.connection.connectionId) {
-//       console.log('Another client connected. ' + connectionCount + ' total.');
-//     }
-//   },
-//   connectionDestroyed: function connectionDestroyedHandler(event) {
-//     connectionCount--;
-//     console.log('A client disconnected. ' + connectionCount + ' total.');
-//   }
-// });
-// session.connect(token, function (error) {
-//   if (error) {
-//     console.log("Failed to connect.");
-//   } else {
-//     console.log('You have connected to the session.');
-//   }
-// });
-
-
 }]).value({
     apiKey: '45396692'
 });

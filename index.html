@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <script src="js/app.js"></script>
     <script src="js/controller.js"></script>
+    <script src="js/db.js"></script>
   </head>
 
   <body>
@@ -36,6 +37,21 @@
     <div ng-controller="DrCtrl as dr">
       <button class="button button-full button-dark" ng-click="dr.createSession()">Create Call</button>
       <button class="button button-full button-dark" ng-click="dr.joinSession()">Join Call</button>
+    </div>
+
+
+
+    <div class="row"  ng-controller="apiCtrl as api">
+     <div class="large-12 columns">
+       <input type="button" ng-click="api.getUsers()" value="GET USERS" />
+       <hr>
+     </div>
+     <div class="large-12 columns">
+       <form novalidate class="simple-form">
+         <input type="text" ng-model="nameInput" placeholder="enter a name"/>
+         <input type="button" ng-click="api.postUser(nameInput)" value="POST USER" />
+       </form>
+     </div>
     </div>
   </body>
 </html>

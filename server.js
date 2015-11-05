@@ -16,7 +16,8 @@ app.use(bodyParser.json());
 app.get('/createSession', function(req, res) {
   opentok.createSession(function(err, session) {
     if (err) return console.log(err);
-      self.sessionObj = session
+      sessionObj = session
+      console.log(sessionObj);
     token = session.generateToken();
     // save the sessionId
     // db.save('session', session.sessionId, done);
@@ -29,11 +30,12 @@ app.post('/session', function(req, res) {
 });
 
 app.get('/joinSession', function(req, res) {
-  token = self.sessionObj.generateToken();
-  console.log(self.sessionObj);
+  token = sessionObj.generateToken();
+  console.log(sessionObj);
+  console.log(token);
     // save the sessionId
     // db.save('session', session.sessionId, done);
-   res.json({ sessionObj: self.sessionObj, token: token });
+  res.json({ hello: sessionObj, token: token });
 });
 
 app.get('/', function(req, res) {

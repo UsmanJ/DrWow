@@ -29,16 +29,17 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
    method: 'GET',
    url: '/joinSession'
   }).then(function(response) {
-    console.log(response.data.sessionObj);
-   response.data.sessionObj.connect( response.data.token, function(err) {
+  var session = OT.initSession(apiKey, response.data.hello.sessionId);
+   console.log(session);
+   session.connect( response.data.token, function(err) {
      if(err){
        alert("there is an error!");
      }else{
-       self.sessionObj.publish();
+       session.publish();
      }
    });
-   self.sessionObj.on("streamCreated", function(event){
-     self.sessionObj.subscribe( event.stream );
+   session.on("streamCreated", function(event){
+     session.subscribe( event.stream );
    });
    }, function errorCallback(response) {
      // called asynchronously if an error occurs

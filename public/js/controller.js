@@ -7,12 +7,12 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
   url: '/createSession'
 }).then(function(response) {
   var session = OT.initSession(apiKey, response.data.session.sessionId);
+  console.log(session)
   session.connect( response.data.token, function(err) {
     if(err){
       alert("there is an error!");
     }else{
       session.publish();
-      console.log(session);
     }
   });
   session.on("streamCreated", function(event){
@@ -25,27 +25,25 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
  };
 
  self.joinSession = function(){
-  //  if (sessionId) {
      $http({
    method: 'GET',
    url: '/joinSession'
   }).then(function(response) {
-   var session = OT.initSession(apiKey, sessionId);
-   session.connect( response.data.token, function(err) {
+    console.log(response.data.sessionObj);
+   response.data.sessionObj.connect( response.data.token, function(err) {
      if(err){
        alert("there is an error!");
      }else{
-       session.publish();
+       self.sessionObj.publish();
      }
    });
-   session.on("streamCreated", function(event){
-     session.subscribe( event.stream );
+   self.sessionObj.on("streamCreated", function(event){
+     self.sessionObj.subscribe( event.stream );
    });
    }, function errorCallback(response) {
      // called asynchronously if an error occurs
      // or server returns response with an error status.
    });
- // };
 };
 
 

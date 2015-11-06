@@ -16,6 +16,7 @@ var sessionObj = null;
 // var LocalStrategy = require('passport-local').Strategy;
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var connectionCount = 0;
 
 
 var routes = require('./routes/index');
@@ -173,7 +174,6 @@ router.route('/consultations/:consultation_id')
       res.json({ message: 'Successfully deleted' });
     });
   });
-
 
 app.listen(port, function() {
   console.log('Our app is running on http://localhost:' + port);

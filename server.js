@@ -22,7 +22,7 @@ var connectionCount = 0;
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname + '/public/views'));
 app.set('view engine', 'jade');
 
 app.use(express.static(__dirname + '/public'));
@@ -49,10 +49,15 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 
-var Account = require('./app/models/account');
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+var Patient = require('./app/models/patient');
+passport.use(new LocalStrategy(Patient.authenticate()));
+passport.serializeUser(Patient.serializeUser());
+passport.deserializeUser(Patient.deserializeUser());
+
+var Doctor = require('./app/models/doctor');
+passport.use(new LocalStrategy(Doctor.authenticate()));
+passport.serializeUser(Doctor.serializeUser());
+passport.deserializeUser(Doctor.deserializeUser());
 
 app.get('/createSession', function(req, res) {
   opentok.createSession(function(err, session) {
@@ -90,9 +95,6 @@ db = mongoose.connect('mongodb://admin:123makers@ds049864.mongolab.com:49864/drw
 
 console.log(db)
 console.log(db.connection.readyState); //logs connection status to db - 0 is disconnected, 1 is connected, 2 is connecting
-
-var User = require('./app/models/account');
-var Consultation = require('./app/models/consultation');
 
 // ROUTES FOR OUR API
 // =============================================================================

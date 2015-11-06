@@ -7,6 +7,7 @@ var storage = require('storage');
 var port = process.env.PORT || 8080;
 var self = this;
 var sessionObj = null;
+var connectionCount = 0;
 
 app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));

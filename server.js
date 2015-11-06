@@ -22,7 +22,7 @@ var connectionCount = 0;
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname + '/public/views'));
 app.set('view engine', 'jade');
 
 app.use(express.static(__dirname + '/public'));

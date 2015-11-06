@@ -13,7 +13,6 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
       bigFirst: true        // Whether to place the big one in the top left (true) or bottom right
   }).layout;
   var connectionCount = 0;
-  var sessionRunning = false;
 
   self.createSession = function(){
     $http({
@@ -27,7 +26,6 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
       alert("there is an error!");
     }else{
       session.publish("publisherContainer");
-      sessionRunning = true;
       layout();
     }
   });
@@ -122,3 +120,18 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
 }]).value({
     apiKey: '45396692'
 });
+
+
+drWow.controller('DrFroms', ['$scope', function($scope) {
+      $scope.master = {};
+
+      $scope.update = function(user) {
+        $scope.master = angular.copy(user);
+      };
+
+      $scope.reset = function() {
+        $scope.user = angular.copy($scope.master);
+      };
+
+      $scope.reset();
+    }]);

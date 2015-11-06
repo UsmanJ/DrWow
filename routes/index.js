@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
-var Account = require('../app/models/account');
+var Doctor = require('../app/models/doctor');
+var Patient = require('../app/models/patient');
 var router = express.Router();
 
 function isAuthenticated(req, res, next) {
@@ -18,37 +19,90 @@ function isAuthenticated(req, res, next) {
 
 
 router.get('/', function (req, res) {
-    res.render('index', { user : req.user });
+    res.render('index', { });
 });
 
-router.get('/register', function(req, res) {
-    res.render('register', { });
+router.get('/dr/index', function(req, res) {
+    res.render('./dr/index', { user : req.user });
 });
 
-router.post('/register', function(req, res) {
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+router.get('/dr/error', function(req, res) {
+    res.render('./dr/error', { });
+});
+
+router.get('/dr/hello', function(req, res) {
+    res.render('./dr/hello', { });
+});
+
+router.get('/dr/login', function(req, res) {
+    res.render('./dr/login', { });
+});
+
+router.get('/dr/register', function(req, res) {
+    res.render('./dr/register', { });
+});
+
+router.get('/patient/index', function(req, res) {
+    res.render('./patient/index', { user : req.user });
+});
+
+router.get('/patient/error', function(req, res) {
+    res.render('./patient/error', { });
+});
+
+router.get('/patient/hello', function(req, res) {
+    res.render('./patient/hello', { });
+});
+
+router.get('/patient/login', function(req, res) {
+    res.render('./patient/login', { });
+});
+
+router.get('/patient/register', function(req, res) {
+    res.render('./patient/register', { });
+});
+
+router.post('/dr/register', function(req, res) {
+    Doctor.register(new Doctor({ username : req.body.username }), req.body.password, function(err, doctor) {
         if (err) {
-            return res.render('register', { account : account });
+            return res.render('dr/register', { doctor : doctor });
         }
 
         passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
+            res.redirect('/dr/index');
         });
     });
 });
 
-router.get('/login', function(req, res) {
-    res.render('login', { user : req.user });
+router.post('/dr/login', passport.authenticate('local'), function(req, res) {
+    res.redirect('/dr/index');
 });
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
-});
-
-
-router.get('/logout', function(req, res) {
+router.get('/dr/logout', function(req, res) {
     req.logout();
-    res.redirect('/');
+    res.redirect('/dr/index');
+});
+
+router.post('/patient/register', function(req, res) {
+    Patient.register(new Patient({ username : req.body.username }), req.body.password, function(err, patient) {
+        if (err) {
+            return res.render('patient/register', { patient : patient });
+        }
+
+        passport.authenticate('local')(req, res, function () {
+            res.redirect('/patient/index');
+        });
+    });
+});
+
+router.post('/patient/login', passport.authenticate('local'), function(req, res) {
+    res.redirect('/patient/index');
+});
+
+
+router.get('/patient/logout', function(req, res) {
+    req.logout();
+    res.redirect('/patient/index');
 });
 
 router.get('/ping', function(req, res){

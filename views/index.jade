@@ -1,10 +1,28 @@
-extends layout
+doctype html
+html(lang='en', ng-app='DrWow')
+  head
+    meta(charset='utf-8')
+    title DrWow
+    script(src='http://static.opentok.com/webrtc/v2.2/js/TB.min.js')
+    script(src='bower_components/angular/angular.js')
+    script(src='bower_components/angular-resource/angular-resource.js')
+    script(src='bower_components/jquery/dist/jquery.js')
+    script(src='bower_components/opentok-angular/opentok-angular.js')
+    link(rel='stylesheet', href='bower_components/bootstrap/dist/css/bootstrap.css')
+    script(src='js/app.js')
+    script(src='js/controller.js')
+    script(src='js/db.js')
+  body.container
+    h2 Welcome
+    div(ng-controller='DrCtrl as dr')
+      h3 Who are you?
+      a(href="/dr/index") Doctor
+      a(href="/patient/index") Patient
 
-block content
-  if (!user)
-    a(href="/login") Login
     br
-    a(href="/register") Register
-  if (user)
-    p You are currently logged in as #{user.username}
-    a(href="/logout") Logout
+    div(ng-controller='apiCtrl as api')
+      button.button.button-full.button-dark(ng-click='api.getUsers()') Get Users
+      hr
+      form.simple-form(novalidate='')
+        input(type='text', ng-model='nameInput', placeholder='enter a name')
+        input(type='button', ng-click='api.postUser(nameInput)', value='Post User')

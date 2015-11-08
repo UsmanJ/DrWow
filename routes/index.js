@@ -84,7 +84,7 @@ router.get('/dr/logout', function(req, res) {
 });
 
 router.post('/patient/register', function(req, res) {
-    Patient.register(new Patient({ username : req.body.username }), req.body.password, function(err, patient) {
+    Patient.register(new Patient({ name : req.body.fullname, email : req.body.email, gender : req.body.gender, age : req.body.age, address : req.body.address, username : req.body.username }), req.body.password, function(err, patient) {
         if (err) {
             return res.render('patient/register', { patient : patient });
         }

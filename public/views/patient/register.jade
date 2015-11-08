@@ -7,6 +7,16 @@ block content
     br
     form(role='form', action="/patient/register",method="post", style='max-width: 300px;')
       .form-group
+          input.form-control(type='text', name="fullname", placeholder='Enter Name')
+      .form-group
+          input.form-control(type='text', name="email", placeholder='Enter Email')
+      .form-group
+          input.form-control(type='text', name="gender", placeholder='Enter Gender')
+      .form-group
+          input.form-control(type='text', name="age", placeholder='Enter Age')
+      .form-group
+          input.form-control(type='text', name="address", placeholder='Enter Address')
+      .form-group
           input.form-control(type='text', name="username", placeholder='Enter Username')
       .form-group
           input.form-control(type='password', name="password", placeholder='Password')

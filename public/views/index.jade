@@ -16,8 +16,11 @@ html(lang='en', ng-app='DrWow')
     h2 Welcome
     div(ng-controller='DrCtrl as dr')
       h3 Who are you?
-      a(href="/dr/index") Doctor
-      a(href="/patient/index") Patient
+      a(href="/dr/index")
+        button.btn.btn-primary(type="button") Doctor
+      a(href="/patient/index")
+        button.btn.btn-primary(type="button") Patient
+
     br
     div(ng-controller='apiCtrl as api')
       button.button.button-full.button-dark(ng-click='api.getUsers()') Get Users

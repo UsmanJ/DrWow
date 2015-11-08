@@ -122,7 +122,7 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
 });
 
 
-drWow.controller('DrFroms', ['$scope', function($scope) {
+drWow.controller('DrForms', ['$scope', function($scope) {
       $scope.master = {};
 
       $scope.update = function(user) {

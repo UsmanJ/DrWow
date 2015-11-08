@@ -44,10 +44,10 @@ app.use(require('express-session')({
    resave: false,
    saveUninitialized: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-
 
 var Patient = require('./app/models/patient');
 passport.use(new LocalStrategy(Patient.authenticate()));

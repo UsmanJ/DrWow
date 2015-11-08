@@ -1,12 +1,12 @@
 extends layout
 
 block content
-  if (!user)
+  if (!patient)
     a(href="/patient/login") Login
     br
     a(href="/patient/register") Register
-  if (user)
-    p You are currently logged in as #{user.username}
+  if (patient)
+    p You are currently logged in as #{patient.username}
     a(href="/patient/logout") Logout
 
     body.container

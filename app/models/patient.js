@@ -3,13 +3,13 @@ var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var Patient = new Schema({
-    username: String,
-    password: String,
     name: String,
     email: String,
     gender: String,
     age: String,
-    address: String
+    address: String,
+    username: String,
+    password: String
 });
 
 Patient.plugin(passportLocalMongoose);

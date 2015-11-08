@@ -17,13 +17,13 @@ function isAuthenticated(req, res, next) {
     res.redirect('/');
 }
 
-
 router.get('/', function (req, res) {
     res.render('index', { });
 });
 
 router.get('/dr/index', function(req, res) {
-    res.render('./dr/index', { user : req.user });
+    res.render('./dr/index', { dr : req.user });
+    console.log(req.user);
 });
 
 router.get('/dr/error', function(req, res) {
@@ -43,7 +43,8 @@ router.get('/dr/register', function(req, res) {
 });
 
 router.get('/patient/index', function(req, res) {
-    res.render('./patient/index', { user : req.user });
+    res.render('./patient/index', { patient : req.user });
+    console.log(req.user)
 });
 
 router.get('/patient/error', function(req, res) {
@@ -76,6 +77,7 @@ router.post('/dr/register', function(req, res) {
 
 router.post('/dr/login', passport.authenticate('local'), function(req, res) {
     res.redirect('/dr/index');
+    console.log(req.user)
 });
 
 router.get('/dr/logout', function(req, res) {
@@ -84,11 +86,10 @@ router.get('/dr/logout', function(req, res) {
 });
 
 router.post('/patient/register', function(req, res) {
-    Patient.register(new Patient({ name : req.body.fullname, email : req.body.email, gender : req.body.gender, age : req.body.age, address : req.body.address, username : req.body.username }), req.body.password, function(err, patient) {
+    Patient.register(new Patient({ username : req.body.username }), req.body.password, function(err, patient) {
         if (err) {
             return res.render('patient/register', { patient : patient });
         }
-
         passport.authenticate('local')(req, res, function () {
             res.redirect('/patient/index');
         });
@@ -97,8 +98,8 @@ router.post('/patient/register', function(req, res) {
 
 router.post('/patient/login', passport.authenticate('local'), function(req, res) {
     res.redirect('/patient/index');
+    console.log(req.user.username)
 });
-
 
 router.get('/patient/logout', function(req, res) {
     req.logout();

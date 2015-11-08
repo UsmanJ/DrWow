@@ -1,4 +1,5 @@
 var express = require('express');
+require('dotenv').load();
 var OpenTok = require('opentok'),
     opentok = new OpenTok(process.env.apiKey,process.env.apiSecret);
 var app = express();

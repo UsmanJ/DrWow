@@ -9,58 +9,58 @@ block content
     p You are currently logged in as #{user.username}
     a(href="/dr/logout") Logout
 
-  body.container
-    h2 Welcome
-    #layoutContainer
-      #publisherContainer
-    div(ng-controller='DrCtrl as dr')
-      button.button.button-full.button-dark(ng-click='dr.createSession()', ng-hide='') Create Call
-      button.button.button-full.button-dark(ng-click='dr.forceDisconnect()') Force Disconnect
+    body.container
+      h2 Welcome
+      #layoutContainer
+        #publisherContainer
+      div(ng-controller='DrCtrl as dr')
+        button.button.button-full.button-dark(ng-click='dr.createSession()', ng-hide='') Create Call
+        button.button.button-full.button-dark(ng-click='dr.forceDisconnect()') Force Disconnect
 
-    br
-
-    div(ng-controller='DrFroms')
-      form.simple-form(novalidate='')
-        | Name:
-        input(type='text', ng-model='user.name')
-        br
-        | E-mail:
-        input(type='email', ng-model='user.email')
-        br
-        | Gender:
-        input(type='radio', ng-model='user.gender', value='male')
-        br
-        | male
-        input(type='radio', ng-model='user.gender', value='female')
-        br
-        | female
-        | Age:
-        input(type='text', ng-model='user.age')
-        br
-        | D.O.B:
-        input(type='text', ng-model='user.dob')
-        br
-        | Address:
-        input(type='text', ng-model='user.address')
-        br
-        | Comments:
-        input(type='text', ng-model='user.drComments')
-        br
-        | Prescribed Medication:
-        input(type='text', ng-model='user.prescription')
-        br
-        | Date:
-        input(type='text', ng-model='user.date')
-        br
-        | Signature of Dr:
-        input(type='text', ng-model='user.drSignature')
-        br
-        | Dr Address:
-        input(type='text', ng-model='user.drAddress')
-        br
-        br
-        input(type='button', ng-click='reset()', value='Reset')
-        input(type='submit', ng-click='update(user)', value='Save')
       br
-      pre.
-        user = {{user | json}}
+
+      div(ng-controller='DrFroms')
+        form.simple-form(novalidate='')
+          | Name:
+          input(type='text', ng-model='user.name')
+          br
+          | E-mail:
+          input(type='email', ng-model='user.email')
+          br
+          | Gender:
+          input(type='radio', ng-model='user.gender', value='male')
+          br
+          | male
+          input(type='radio', ng-model='user.gender', value='female')
+          br
+          | female
+          | Age:
+          input(type='text', ng-model='user.age')
+          br
+          | D.O.B:
+          input(type='text', ng-model='user.dob')
+          br
+          | Address:
+          input(type='text', ng-model='user.address')
+          br
+          | Comments:
+          input(type='text', ng-model='user.drComments')
+          br
+          | Prescribed Medication:
+          input(type='text', ng-model='user.prescription')
+          br
+          | Date:
+          input(type='text', ng-model='user.date')
+          br
+          | Signature of Dr:
+          input(type='text', ng-model='user.drSignature')
+          br
+          | Dr Address:
+          input(type='text', ng-model='user.drAddress')
+          br
+          br
+          input(type='button', ng-click='reset()', value='Reset')
+          input(type='submit', ng-click='update(user)', value='Save')
+        br
+        pre.
+          user = {{user | json}}

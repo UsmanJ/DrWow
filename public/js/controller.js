@@ -1,5 +1,6 @@
 drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($scope, OTSession, apiKey, $http) {
   var self = this;
+  var layoutContainer = document.getElementById("layoutContainer");
   var layout = initLayoutContainer(document.getElementById("layoutContainer"), {
       maxRatio: 3/2,     // The narrowest ratio that will be used (default 2x3)
       minRatio: 9/16,      // The widest ratio that will be used (default 16x9)

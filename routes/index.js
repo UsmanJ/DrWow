@@ -20,7 +20,6 @@ function isAuthenticated(req, res, next) {
 router.get('/', function (req, res) {
     console.log(req.user)
     res.render('index', { user : req.user });
-    console.log(req.user.role)
 });
 
 router.get('/register', function(req, res) {

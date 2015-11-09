@@ -85,8 +85,10 @@ app.get('/joinSession', function(req, res) {
 
 
 var mongoose = require('mongoose');
-db = mongoose.connect('mongodb://admin:123makers@ds049864.mongolab.com:49864/drwow'); // connect to our database
-//modulus 'mongodb://alexlemons1:modulus@apollo.modulusmongo.net:27017/vebEb2ex'
+cfg = require('./config');
+console.log(cfg);
+db = mongoose.connect(cfg.mongo.db); // connect to our database
+
 
 console.log(db)
 console.log(db.connection.readyState); //logs connection status to db - 0 is disconnected, 1 is connected, 2 is connecting

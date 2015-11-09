@@ -43,6 +43,7 @@
     "express": "^4.13.3",
     "mongoose": "~4.2.4",
     "opentok": "^2.3.0",
+    "sendgrid": "^1.9.2",
     "storage": "^0.2.0"
   }
 }

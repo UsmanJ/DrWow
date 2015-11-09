@@ -8,6 +8,13 @@ block content
   if (params.user)
     p You are currently logged in as #{params.user.username}
     if(params.user.role === "doctor")
-      p #{params.doctors_array}
-
+      if(params.patients_array.length === 0)
+        p No patients online
+      else
+        p Your patient is #{params.patients_array[0].username}
+    if(params.user.role === "patient")
+      if(params.doctors_array.length === 0)
+        p No doctors online
+      else
+        p Your doctor is #{params.doctors_array[0].username}
     a(href="/logout") Logout

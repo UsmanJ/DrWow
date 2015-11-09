@@ -59,7 +59,6 @@ app.get('/createSession', function(req, res) {
   opentok.createSession(function(err, session) {
     if (err) return console.log(err);
       sessionObj = session
-      console.log(sessionObj);
     token = session.generateToken();
     // save the sessionId
     // db.save('session', session.sessionId, done);
@@ -75,8 +74,6 @@ app.post('/session', function(req, res) {
 
 app.get('/joinSession', function(req, res) {
   token = sessionObj.generateToken();
-  console.log(sessionObj);
-  console.log(token);
     // save the sessionId
     // db.save('session', session.sessionId, done);
   res.json({ hello: sessionObj, token: token });

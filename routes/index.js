@@ -3,6 +3,8 @@ var passport = require('passport');
 var Account = require('../app/models/account');
 var router = express.Router();
 
+var users_array = [];
+
 function isAuthenticated(req, res, next) {
 
     // do any checks you want to in here
@@ -19,8 +21,12 @@ function isAuthenticated(req, res, next) {
 
 router.get('/', function (req, res) {
     console.log(req.user)
+    console.log(req.sessionID)
     res.render('index', { user : req.user });
+    users_array.push(req.user)
     console.log(req.user.role)
+    console.log('users array', users_array)
+
 });
 
 router.get('/register', function(req, res) {

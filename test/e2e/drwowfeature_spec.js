@@ -1,7 +1,7 @@
 describe('DrWoW login', function() {
 
   beforeEach(function(){
-    return browser.ignoreSynchronization = true;
+    browser.ignoreSynchronization = true;
     browser.driver.get('http://localhost:8080/login');
 
 })
@@ -10,11 +10,11 @@ describe('DrWoW login', function() {
   });
 
   it('You can login', function() {
-    browser.driver.findElement(by.id('username')).sendKeys('test@test.com');
+      browser.driver.findElement(by.id('username')).sendKeys('111test@test.co.uk');
       browser.driver.findElement(by.id('password')).sendKeys('123makers');
       browser.driver.findElement(by.id('submit')).click();
 
-      expect(element(by.css('.h1')).getText()).toBe('Dr WoW');
+      expect(element(by.css('h1')).getText()).toBe('Dr WoW');
   });
 
 

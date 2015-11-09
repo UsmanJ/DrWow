@@ -1,13 +1,13 @@
 extends layout
 
 block content
-  if (!user)
+  if (!params.user)
     a(href="/login") Login
     br
     a(href="/register") Register
-  if (user)
-    p You are currently logged in as #{user.username}
-    if(user.role === "doctor")
-      p DOCTOR
+  if (params.user)
+    p You are currently logged in as #{params.user.username}
+    if(params.user.role === "doctor")
+      p #{params.doctors_array}
 
     a(href="/logout") Logout

@@ -4,7 +4,8 @@ var passportLocalMongoose = require('passport-local-mongoose');
 
 var Doctor = new Schema({
     username: String,
-    password: String
+    password: String,
+    role: String
 });
 
 Doctor.plugin(passportLocalMongoose);

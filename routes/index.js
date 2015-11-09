@@ -18,89 +18,35 @@ function isAuthenticated(req, res, next) {
 }
 
 router.get('/', function (req, res) {
-    res.render('index', { });
-});
-
-router.get('/dr/index', function(req, res) {
-    res.render('./dr/index', { dr: req.user });
-});
-
-router.get('/dr/error', function(req, res) {
-    res.render('./dr/error', { });
-});
-
-router.get('/dr/hello', function(req, res) {
-    res.render('./dr/hello', { });
-});
-
-router.get('/dr/login', function(req, res) {
-    res.render('./dr/login', { });
-});
-
-router.get('/dr/register', function(req, res) {
-    res.render('./dr/register', { });
-});
-
-router.get('/patient/index', function(req, res) {
-  console.log(req.isAuthenticated())
-    res.render('./patient/index', { patient: req.user });
-});
-
-router.get('/patient/error', function(req, res) {
-    res.render('./patient/error', { });
+    console.log(req.user)
+    res.render('index', { user : req.user });
+    console.log(req.user.role)
 });
 
 router.get('/patient/hello', function(req, res) {
     res.render('./patient/hello', { });
 });
 
-router.get('/patient/login', function(req, res) {
-    res.render('./patient/login', { });
-});
 
-router.get('/patient/register', function(req, res) {
-    res.render('./patient/register', { });
-});
-
-router.post('/dr/register', function(req, res) {
-    Doctor.register(new Doctor({ username : req.body.username }), req.body.password, function(err, doctor) {
+router.post('/register', function(req, res) {
+    Account.register(new Account({ username : req.body.username, role : req.body.role }), req.body.password, function(err, account) {
         if (err) {
-            return res.render('dr/register', { doctor : doctor });
+            return res.render('/register', { doctor : doctor });
         }
 
         passport.authenticate('local')(req, res, function () {
-            res.redirect('/dr/index');
+            res.redirect('/');
         });
     });
 });
 
-router.post('/dr/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/dr/index');
+router.post('/login', passport.authenticate('local'), function(req, res) {
+    res.redirect('/');
 });
 
-router.get('/dr/logout', function(req, res) {
+router.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('/dr/index');
-});
-
-router.post('/patient/register', function(req, res) {
-    Patient.register(new Patient({ username : req.body.username }), req.body.password, function(err, patient) {
-        if (err) {
-            return res.render('patient/register', { patient : patient });
-        }
-        passport.authenticate('local')(req, res, function () {
-            res.redirect('/patient/index');
-        });
-    });
-});
-
-router.post('/patient/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/patient/index');
-});
-
-router.get('/patient/logout', function(req, res) {
-    req.logout();
-    res.redirect('/patient/index');
+    res.redirect('/');
 });
 
 router.get('/ping', function(req, res){

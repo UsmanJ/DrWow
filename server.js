@@ -1,5 +1,4 @@
 var express = require('express');
-require('dotenv').load();
 var OpenTok = require('opentok'),
     opentok = new OpenTok(process.env.apiKey,process.env.apiSecret);
 var app = express();
@@ -88,14 +87,9 @@ app.get('/joinSession', function(req, res) {
 });
 
 
-
-
 var mongoose = require('mongoose');
-db = mongoose.connect('mongodb://admin:123makers@ds049864.mongolab.com:49864/drwow'); // connect to our database
-//modulus 'mongodb://alexlemons1:modulus@apollo.modulusmongo.net:27017/vebEb2ex'
-
-console.log(db)
-console.log(db.connection.readyState); //logs connection status to db - 0 is disconnected, 1 is connected, 2 is connecting
+cfg = require('./config');
+db = mongoose.connect(cfg.mongo.db); // connect to our database
 
 // ROUTES FOR OUR API
 // =============================================================================

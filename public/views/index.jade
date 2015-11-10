@@ -2,19 +2,44 @@ extends layout
 
 block content
   if (!params.user)
-    a(href="/login") Login
-    br
-    a(href="/register") Register
+    .row
+        .large-3.columns
+          h1
+            img(src='img/DrWow.jpg')
+        .large-9.columns
+            ul.button-group.right
+              li
+                a.button.small.success(href="/login") Login
+              li
+                a.button.small.success(href="/register") Register
   if (params.user)
-    p You are currently logged in as #{params.user.username}
-    if(params.user.role === "doctor")
-      if(params.patients_array.length === 0)
-        p No patients online
-      else
-        p Your patient is #{params.patients_array[0].username}
-    if(params.user.role === "patient")
-      if(params.doctors_array.length === 0)
-        p No doctors online
-      else
-        p Your doctor is #{params.doctors_array[0].username}
-    a(href="/logout") Logout
+    .row
+        .large-3.columns
+          h1
+            img(src='img/DrWow.jpg')
+        .large-9.columns
+            ul.button-group.right
+              li
+                a.button.small.success(href="/logout") Logout
+        .large-12.columns
+            hr
+            p Welcome #{params.user.username}
+
+            if(params.user.role === "doctor")
+              if(params.patients_array.length === 0)
+                p No patients online
+              else
+                p Your patient is #{params.patients_array[0].username}
+            if(params.user.role === "patient")
+              if(params.doctors_array.length === 0)
+                p No doctors online
+              else
+                p Your doctor is #{params.doctors_array[0].username}
+
+
+  footer.row
+    .large-12.columns
+      hr
+      .row
+        .large-6.columns
+          p DrWoW

@@ -1,7 +1,9 @@
 var express = require('express');
 var OpenTok = require('opentok'),
     opentok = new OpenTok(process.env.apiKey,process.env.apiSecret);
-var app = express();
+var app = require('express')();
+var server = app.listen(8080);
+var io = require('socket.io').listen(server);
 var passport = require('passport');
 var path = require('path');
 var flash = require('connect-flash');
@@ -22,6 +24,19 @@ var connectionCount = 0;
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var users = require('./routes/consultations');
+
+io.on('connection', function(socket){
+
+  socket.on('pt', function(msg){
+    socket.broadcast.emit('pt', {user : msg});
+    console.log('hello', msg);
+  });
+
+  socket.on('dr', function(msg){
+    socket.broadcast.emit('dr', {user : msg});
+    console.log('hello', msg);
+  });
+});
 
 app.set('views', path.join(__dirname + '/public/views'));
 app.set('view engine', 'jade');
@@ -97,7 +112,7 @@ var Consultation = require('./app/models/consultation');
 // ROUTES FOR OUR API
 // =============================================================================
 
-
-app.listen(port, function() {
-  console.log('Our app is running on http://localhost:' + port);
-});
+// 
+// app.listen(port, function() {
+//   console.log('Our app is running on http://localhost:' + port);
+// });

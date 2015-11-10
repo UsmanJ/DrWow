@@ -1,6 +1,10 @@
 extends layout
 
 block content
+  script(src='https://cdn.socket.io/socket.io-1.3.7.js')
+  script.
+    var socket = io();
+
   if(!params.user)
     .row
         .large-3.columns
@@ -26,7 +30,15 @@ block content
 
     .row
       if(params.user.role === "doctor")
+        script.
+          socket.on('pt', function(msg){
+          $('#patient_username').append(msg.user);
+          });
+
+          socket.emit('dr', ('#{params.user.username}'));
+
         .large-12.columns
+          h3 Welcome #{params.user.username}
           #layoutContainer
             #publisherContainer
           div(ng-controller='DrCtrl as dr')
@@ -36,6 +48,7 @@ block content
             p No patients online
           else
             p Your patient is #{params.patients_array[0].username}
+            p#patient_username
             form(role='form', action="/consultation",method="post", style='max-width: 300px;')
               .form-group
                   input.form-control(type='text', name="comments", placeholder='Enter Comments', id='comments')
@@ -50,10 +63,17 @@ block content
               button.small.secondary(type='submit', id='submit') Submit
 
       if(params.user.role === "patient")
+        script.
+          socket.on('dr', function(msg){
+          $('#dr_username').append(msg.user);
+          });
+          socket.emit('pt', ('#{params.user.username}, #{params.user.role}' ));
+        h3 Welcome #{params.user.username}
         if(params.doctors_array.length === 0)
           p No doctors online
         else
           p Your doctor is #{params.doctors_array[0].username}
+          p#dr_username
           #layoutContainer
             #publisherContainer
           div(ng-controller='DrCtrl as dr')

@@ -23,18 +23,21 @@ block content
                 a.button.small.success(href="/logout") Logout
         .large-12.columns
             hr
-            p Welcome #{params.user.username}
+
+    .row
+
 
             if(params.user.role === "doctor")
-              #layoutContainer
-                #publisherContainer
-              div(ng-controller='DrCtrl as dr')
-                button.button.button-full.button-dark(ng-click='dr.createSession()', ng-hide='') Create Call
-                button.button.button-full.button-dark(ng-click='dr.forceDisconnect()') Force Disconnect
-              if(params.patients_array.length === 0)
-                p No patients online
-              else
-                p Your patient is #{params.patients_array[0].username}
+              .large-12.columns
+                #layoutContainer
+                  #publisherContainer
+                div(ng-controller='DrCtrl as dr')
+                  button.small.secondary(ng-click='dr.createSession()', ng-hide='') Create Call
+                  button.small.secondary(ng-click='dr.forceDisconnect()') Force Disconnect
+                if(params.patients_array.length === 0)
+                  p Welcome #{params.user.username}, there are no patients online
+                else
+                  p Welcome #{params.user.username}, your patient is #{params.patients_array[0].username}
 
             if(params.user.role === "patient")
               if(params.doctors_array.length === 0)
@@ -44,7 +47,7 @@ block content
                 #layoutContainer
                   #publisherContainer
                 div(ng-controller='DrCtrl as dr')
-                  button.button.button-full.button-dark(ng-click='dr.joinSession()') Join Call
+                  button.small.secondary(ng-click='dr.joinSession()') Join Call
 
 
   footer.row

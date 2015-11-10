@@ -3,6 +3,10 @@ var passport = require('passport');
 var Account = require('../app/models/account');
 var router = express.Router();
 
+var patients_array = [];
+var doctors_array = [];
+
+
 function isAuthenticated(req, res, next) {
 
     // do any checks you want to in here
@@ -18,8 +22,11 @@ function isAuthenticated(req, res, next) {
 
 
 router.get('/', function (req, res) {
-    console.log(req.user)
-    res.render('index', { user : req.user });
+    if(req.user === undefined){
+      res.render('index', { params : { user : req.user, doctors_array : doctors_array, patients_array : patients_array}});
+    } else if(req.user !== undefined){
+      res.render('index', { params : { user : req.user, doctors_array : doctors_array, patients_array : patients_array }});
+    };
 });
 
 router.get('/register', function(req, res) {
@@ -43,6 +50,11 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
+    if(req.user.role === 'doctor'){
+      if(doctors_array.length === 0 || doctors_array.indexOf(req.user) !== -1) { doctors_array.push(req.user) };
+    }else if(req.user.role === 'patient'){
+      if(patients_array.length === 0 || patients_array.indexOf(req.user) !== -1) { patients_array.push(req.user) };
+    };
     res.redirect('/');
 });
 

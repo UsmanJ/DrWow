@@ -1,7 +1,12 @@
-var express = require('express');
+var express = require('express'),
+    http    = require('http');
 var OpenTok = require('opentok'),
     opentok = new OpenTok(process.env.apiKey,process.env.apiSecret);
-var app = express();
+
+var app = require('express')();
+var server = app.listen(8080);
+var io = require('socket.io').listen(server);
+
 var passport = require('passport');
 var path = require('path');
 var flash = require('connect-flash');
@@ -23,6 +28,18 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var users = require('./routes/consultations');
 
+io.on('connection', function(socket){
+  socket.on('pt', function(msg){
+    socket.emit('pt', {user : msg});
+    console.log('hello', msg);
+  });
+
+  socket.on('dr', function(msg){
+    socket.emit('dr', {user : msg});
+    console.log('hello', msg);
+  });
+});
+
 app.set('views', path.join(__dirname + '/public/views'));
 app.set('view engine', 'jade');
 
@@ -30,7 +47,6 @@ app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 
 // set up authentication
 
@@ -59,7 +75,6 @@ app.get('/createSession', function(req, res) {
   opentok.createSession(function(err, session) {
     if (err) return console.log(err);
       sessionObj = session
-      console.log(sessionObj);
     token = session.generateToken();
     // save the sessionId
     // db.save('session', session.sessionId, done);
@@ -75,8 +90,6 @@ app.post('/session', function(req, res) {
 
 app.get('/joinSession', function(req, res) {
   token = sessionObj.generateToken();
-  console.log(sessionObj);
-  console.log(token);
     // save the sessionId
     // db.save('session', session.sessionId, done);
   res.json({ hello: sessionObj, token: token });
@@ -89,8 +102,8 @@ var mongoose = require('mongoose');
 db = mongoose.connect('mongodb://admin:123makers@ds049864.mongolab.com:49864/drwow'); // connect to our database
 //modulus 'mongodb://alexlemons1:modulus@apollo.modulusmongo.net:27017/vebEb2ex'
 
-console.log(db)
-console.log(db.connection.readyState); //logs connection status to db - 0 is disconnected, 1 is connected, 2 is connecting
+// console.log(db)
+// console.log(db.connection.readyState); //logs connection status to db - 0 is disconnected, 1 is connected, 2 is connecting
 
 var User = require('./app/models/account');
 var Consultation = require('./app/models/consultation');
@@ -99,6 +112,6 @@ var Consultation = require('./app/models/consultation');
 // =============================================================================
 
 
-app.listen(port, function() {
-  console.log('Our app is running on http://localhost:' + port);
-});
+// app.listen(port, function() {
+//   console.log('Our app is running on http://localhost:' + port);
+// });

@@ -22,7 +22,6 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
   url: '/createSession'
 }).then(function(response) {
   var session = OT.initSession(apiKey, response.data.session.sessionId);
-  console.log(session)
   session.connect( response.data.token, function(err) {
     if(err){
       alert("there is an error!");
@@ -35,7 +34,6 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
   self.forceDisconnect = function() {
     session.forceDisconnect(connection, function (error) {
     if (error) {
-        console.log(error);
       } else {
         console.log("Connection forced to disconnect: " + connection.id);
       }

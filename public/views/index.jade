@@ -9,19 +9,44 @@ block content
     p You are currently logged in as #{user.username}
     p You are currently logged in as #{user.role}
     a(href="/logout") Logout
+    script(src='https://cdn.socket.io/socket.io-1.3.7.js')
+    script.
+      var socket = io();
+      socket.emit('user2', ('#{user.username}, #{user.role}' ));
+
     if(user.role === "patient")
+      script.
+        socket.on('dr', function(msg){
+        console.log(msg);
+        $('#dr_username').append(msg);
+        });
+
+        socket.emit('pt', ('#{user.username}'));
 
       body.container
-        h2 Welcome
+        h2 Welcome #{user.username}
+        p Your doctor is:
+        p#patient_username
         #layoutContainer
           #publisherContainer
         div(ng-controller='DrCtrl as dr')
           button.button.button-full.button-dark(ng-click='dr.joinSession()') Join Call
 
+
+
     if(user.role === "doctor")
+      script.
+        socket.on('pt', function(msg){
+        $('#patient_username').append(msg);
+        console.log(msg);
+        });
+
+        socket.emit('dr', ('#{user.username}'));
 
       body.container
         h2 Welcome
+        p Your patient is:
+        p#patient_username
         #layoutContainer
           #publisherContainer
         div(ng-controller='DrCtrl as dr')

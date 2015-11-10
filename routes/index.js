@@ -22,18 +22,6 @@ router.get('/', function (req, res) {
     res.render('index', { user : req.user });
 });
 
-router.get('/register0', function(req, res) {
-    res.render('register_dr', { });
-});
-
-router.get('/register1', function(req, res) {
-    res.render('register_patient', { });
-});
-
-router.get('/account', function(req, res) {
-    res.render('account', { });
-});
-
 router.get('/register', function(req, res) {
     res.render('register', { });
 });

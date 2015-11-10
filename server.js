@@ -1,4 +1,6 @@
 var express = require('express');
+var mandrill = require('mandrill-api/mandrill');
+var mandrill_client = new mandrill.Mandrill('xLxWtue9hFxqcLi4prYhCg');
 var OpenTok = require('opentok'),
     opentok = new OpenTok(process.env.apiKey,process.env.apiSecret);
 var app = express();
@@ -78,9 +80,6 @@ app.get('/joinSession', function(req, res) {
     // db.save('session', session.sessionId, done);
   res.json({ hello: sessionObj, token: token });
 });
-
-
-
 
 var mongoose = require('mongoose');
 db = mongoose.connect('mongodb://admin:123makers@ds049864.mongolab.com:49864/drwow'); // connect to our database

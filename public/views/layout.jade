@@ -1,7 +1,8 @@
 doctype html
-html
+html(lang='en', ng-app='DrWow')
   head
-    title= title
+    title DrWow
+    meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', href='css/foundation.css')
     script(src="js/vendor/modernizr.js")
@@ -9,4 +10,17 @@ html
   body
     block content
 
+  script(src='js/vendor/jquery.js')
+  script(src='js/foundation.min.js')
+  script.
+    $(document).foundation();
   script(src='http://code.jquery.com/jquery.js')
+  script(src='http://static.opentok.com/webrtc/v2.2/js/TB.min.js')
+  script(src='js/opentok-layout.min.js')
+  script(src='bower_components/angular/angular.js')
+  script(src='bower_components/angular-resource/angular-resource.js')
+  script(src='bower_components/jquery/dist/jquery.js')
+  script(src='bower_components/opentok-angular/opentok-angular.js')
+  script(src='js/app.js')
+  script(src='js/controller.js')
+  script(src='js/db.js')

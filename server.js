@@ -59,7 +59,6 @@ app.get('/createSession', function(req, res) {
   opentok.createSession(function(err, session) {
     if (err) return console.log(err);
       sessionObj = session
-      console.log(sessionObj);
     token = session.generateToken();
     // save the sessionId
     // db.save('session', session.sessionId, done);
@@ -75,8 +74,6 @@ app.post('/session', function(req, res) {
 
 app.get('/joinSession', function(req, res) {
   token = sessionObj.generateToken();
-  console.log(sessionObj);
-  console.log(token);
     // save the sessionId
     // db.save('session', session.sessionId, done);
   res.json({ hello: sessionObj, token: token });
@@ -86,8 +83,10 @@ app.get('/joinSession', function(req, res) {
 
 
 var mongoose = require('mongoose');
-db = mongoose.connect('mongodb://admin:123makers@ds049864.mongolab.com:49864/drwow'); // connect to our database
-//modulus 'mongodb://alexlemons1:modulus@apollo.modulusmongo.net:27017/vebEb2ex'
+cfg = require('./config');
+console.log(cfg);
+db = mongoose.connect(cfg.mongo.db); // connect to our database
+
 
 console.log(db)
 console.log(db.connection.readyState); //logs connection status to db - 0 is disconnected, 1 is connected, 2 is connecting

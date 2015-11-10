@@ -3,16 +3,51 @@ extends layout
 block content
   .container
     h1 Register Page
-    p.lead Say something worthwhile here.
+    p.lead Who are you?
     br
-    form(role='form', action="/register",method="post", style='max-width: 300px;')
-      .form-group
-          input.form-control(type='text', name="username", placeholder='Enter Username')
-      .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-      .form-group
-        input.form-control(type='role', name="role", placeholder='role')
-      button.btn.btn-default(type='submit') Submit
-      &nbsp;
-      a(href='/')
-        button.btn.btn-primary(type="button") Cancel
+
+
+    ul.tabs(data-tab='', role='tablist')
+        li.tab-title.active(role='presentation')
+            a(href='#panel2-1', role='tab', tabindex='0', aria-selected='true', aria-controls='panel2-1') Patient
+        li.tab-title(role='presentation')
+            a(href='#panel2-2', role='tab', tabindex='0', aria-selected='false', aria-controls='panel2-2') Doctor
+        .tabs-content
+          section#panel2-1.content.active(role='tabpanel', aria-hidden='false')
+            form(role='form', action="/register",method="post", style='max-width: 300px;')
+              .form-group
+                  input.form-control(type='text', name="fullname", placeholder='Enter Name')
+              .form-group
+                  input.form-control(type='text', name="email", placeholder='Enter Email')
+              .form-group
+                  select(name='gender')
+                    option(value='male') Male
+                    option(value='female') Female
+              .form-group
+                  input.form-control(type='text', name="age", placeholder='Enter Age')
+              .form-group
+                  input.form-control(type='text', name="address", placeholder='Enter Address')
+              .form-group
+                  input.form-control(type='text', name="username", placeholder='Enter Username', id='username')
+              .form-group
+                input.form-control(type='password', name="password", placeholder='Password', id='password')
+              button.btn.btn-default(type='submit', id='submit') Submit
+              &nbsp;
+              a(href='/')
+                button.btn.btn-primary(type="button") Cancel
+          section#panel2-2.content(role='tabpanel', aria-hidden='true')
+            form(role='form', action="/register",method="post", style='max-width: 300px;')
+              .form-group
+                  input.form-control(type='text', name="fullname", placeholder='Enter Name')
+              .form-group
+                  input.form-control(type='text', name="email", placeholder='Enter Email')
+              .form-group
+                  input.form-control(type='text', name="gmcRef", placeholder='Enter GMC Reference Number')
+              .form-group
+                  input.form-control(type='text', name="username", placeholder='Enter Username', id='username')
+              .form-group
+                  input.form-control(type='password', name="password", placeholder='Password', id='password')
+              button.btn.btn-default(type='submit', id='submit') Submit
+              &nbsp;
+              a(href='/')
+                button.btn.btn-primary(type="button") Cancel

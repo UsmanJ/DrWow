@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  if (!params.user)
+  if(!params.user)
     .row
         .large-3.columns
           h1
@@ -12,7 +12,7 @@ block content
                 a.button.small.success(href="/login") Login
               li
                 a.button.small.success(href="/register") Register
-  if (params.user)
+  if(params.user)
     .row
         .large-3.columns
           h1
@@ -26,15 +26,25 @@ block content
             p Welcome #{params.user.username}
 
             if(params.user.role === "doctor")
+              #layoutContainer
+                #publisherContainer
+              div(ng-controller='DrCtrl as dr')
+                button.button.button-full.button-dark(ng-click='dr.createSession()', ng-hide='') Create Call
+                button.button.button-full.button-dark(ng-click='dr.forceDisconnect()') Force Disconnect
               if(params.patients_array.length === 0)
                 p No patients online
               else
                 p Your patient is #{params.patients_array[0].username}
+
             if(params.user.role === "patient")
               if(params.doctors_array.length === 0)
                 p No doctors online
               else
                 p Your doctor is #{params.doctors_array[0].username}
+                #layoutContainer
+                  #publisherContainer
+                div(ng-controller='DrCtrl as dr')
+                  button.button.button-full.button-dark(ng-click='dr.joinSession()') Join Call
 
 
   footer.row

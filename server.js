@@ -29,13 +29,14 @@ var users = require('./routes/users');
 var users = require('./routes/consultations');
 
 io.on('connection', function(socket){
+
   socket.on('pt', function(msg){
-    socket.emit('pt', {user : msg});
+    socket.broadcast.emit('pt', {user : msg});
     console.log('hello', msg);
   });
 
   socket.on('dr', function(msg){
-    socket.emit('dr', {user : msg});
+    socket.broadcast.emit('dr', {user : msg});
     console.log('hello', msg);
   });
 });

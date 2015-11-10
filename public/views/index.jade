@@ -17,16 +17,17 @@ block content
     if(user.role === "patient")
       script.
         socket.on('dr', function(msg){
-        console.log(msg);
-        $('#dr_username').append(msg);
+        $('#dr_username').append(msg.user);
         });
 
-        socket.emit('pt', ('#{user.username}'));
+        socket.emit('pt', ('#{user.username}, #{user.role}' ));
+
+        socket.emit('pt2', ('#{user.username}'));
 
       body.container
         h2 Welcome #{user.username}
         p Your doctor is:
-        p#patient_username
+        p#dr_username
         #layoutContainer
           #publisherContainer
         div(ng-controller='DrCtrl as dr')
@@ -37,8 +38,7 @@ block content
     if(user.role === "doctor")
       script.
         socket.on('pt', function(msg){
-        $('#patient_username').append(msg);
-        console.log(msg);
+        $('#patient_username').append(msg.user);
         });
 
         socket.emit('dr', ('#{user.username}'));

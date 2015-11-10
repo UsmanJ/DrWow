@@ -2,20 +2,42 @@ var express = require('express');
 var passport = require('passport');
 var Account = require('../app/models/account');
 var router = express.Router();
+var nodemailer = require("nodemailer");
+var mandrillTransport = require('nodemailer-mandrill-transport');
+// function isAuthenticated(req, res, next) {
+//
+//     // do any checks you want to in here
+//
+//     // CHECK THE USER STORED IN SESSION FOR A CUSTOM VARIABLE
+//     // you can do this however you want with whatever variables you set up
+//     if (req.user.authenticated)
+//         return next();
+//
+//     // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
+//     res.redirect('/');
+// }
 
-function isAuthenticated(req, res, next) {
 
-    // do any checks you want to in here
+var transport = nodemailer.createTransport(mandrillTransport({
+  auth: {
+    apiKey: 'TrfRWARNNDbLYLENx_chjQ'
+  }
+}));
 
-    // CHECK THE USER STORED IN SESSION FOR A CUSTOM VARIABLE
-    // you can do this however you want with whatever variables you set up
-    if (req.user.authenticated)
-        return next();
-
-    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
-    res.redirect('/');
-}
-
+function sendMail() {
+  transport.sendMail({
+    from: 'DrWoW@DrWoW.com',
+    to: 'alexlemons1@gmail.com',
+    subject: 'The Doctor will see you now',
+    html: '<p>Hello ?</p>'
+  }, function(err, info) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(info);
+    }
+  });
+};
 
 router.get('/', function (req, res) {
     console.log(req.user)
@@ -54,6 +76,20 @@ router.get('/logout', function(req, res) {
 
 router.get('/ping', function(req, res){
     res.status(200).send("pong!");
+    console.log("got to ping !!")
 });
+//
+
+router.get('/email',function(req,res){
+  sendMail();
+  // console.log("are we done here?");
+  // transport.close();
+  res.redirect('/ping')
+  // server.
+});
+
+
+
+
 
 module.exports = router;

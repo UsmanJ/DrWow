@@ -6,7 +6,7 @@ block content
     br
     a(href="/register") Register
   if (user)
-    p You are currently logged in as #{user.username}
+    h1 You are currently logged in as #{user.username} - #{user.role}
     p You are currently logged in as #{user.role}
     a(href="/logout") Logout
     if(user.role === "patient")

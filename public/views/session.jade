@@ -27,17 +27,36 @@ block content
     .row
       if(params.user.role === "doctor")
         .large-12.columns
-          h2 Welcome back #{params.user.username}
           #layoutContainer
             #publisherContainer
-          div(ng-controller='DrCtrl as dr')
-            button.small.secondary(ng-click='dr.createSession()', ng-hide='') Create Call
-            button.small.secondary(ng-click='dr.disconnect()') Disconnect
           if(params.patients_array.length === 0)
             p No patients online
             <meta http-equiv="refresh" content="10" />
           else
-            p Your patient is #{params.patients_array[0].username}
+            form
+              .row.medium-uncollapse.large-collapse
+                .large-4.columns
+                  label
+                    | Patient's Name
+                    input(type='text', value='#{params.patients_array[0].name}', disabled='')
+                .large-4.columns
+                  label
+                    | Patient's Email Address
+                    input(type='text', value='#{params.patients_array[0].email}', disabled='')
+              .row.medium-uncollapse.large-collapse
+                .large-4.columns
+                  label
+                    | Patient's Gender
+                    input(type='text', value='#{params.patients_array[0].gender}', disabled='')
+                .large-4.columns
+                  label
+                    | Patient's Age
+                    input(type='text', value='#{params.patients_array[0].age}', disabled='')
+
+
+            div(ng-controller='DrCtrl as dr')
+              button.small.secondary(ng-click='dr.createSession()', ng-hide='') Create Call
+              button.small.secondary(ng-click='dr.disconnect()') Disconnect
             form(role='form', action="/consultation",method="post", style='max-width: 300px;')
               .form-group
                   input.form-control(type='text', name="comments", placeholder='Enter Comments', id='comments')
@@ -52,12 +71,11 @@ block content
               button.small.secondary(type='submit', id='submit') Submit
 
       if(params.user.role === "patient")
-        h2 Welcome back #{params.user.username}
         if(params.doctors_array.length === 0)
-          p No doctors online
+          h3 No doctors online at the moment.
           <meta http-equiv="refresh" content="10" />
         else
-          p Your doctor is #{params.doctors_array[0].username}
+          h3 Your doctor is #{params.doctors_array[0].name}
           #layoutContainer
             #publisherContainer
           div(ng-controller='DrCtrl as dr')
@@ -65,7 +83,6 @@ block content
             &nbsp;
             a(href='/')
               button.small.secondary(ng-click='dr.disconnect()') Disconnect
-
 
   footer.row
     .large-12.columns

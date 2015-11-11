@@ -27,6 +27,7 @@ block content
     .row
       if(params.user.role === "doctor")
         .large-12.columns
+          h2 Welcome back #{params.user.username}
           #layoutContainer
             #publisherContainer
           div(ng-controller='DrCtrl as dr')
@@ -40,9 +41,9 @@ block content
               .form-group
                   input.form-control(type='text', name="comments", placeholder='Enter Comments', id='comments')
               .form-group
-                input.form-control(type='text', name="prescription", placeholder='Prescription', id='prescription')
+                  input.form-control(type='text', name="prescription", placeholder='Prescription', id='prescription')
               .form-group
-                input.form-control(type='date', name="date", id='date')
+                  input.form-control(type='date', name="date", id='date')
               .form-group
                   input.form-control(type='hidden', readonly="readonly", name="doctor", value='(#{params.user._id})', id='role')
               .form-group
@@ -50,6 +51,7 @@ block content
               button.small.secondary(type='submit', id='submit') Submit
 
       if(params.user.role === "patient")
+        h2 Welcome back #{params.user.username}
         if(params.doctors_array.length === 0)
           p No doctors online
         else

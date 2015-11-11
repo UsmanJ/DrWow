@@ -3,7 +3,7 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
-var ConsultationSchema   = new Schema({
+var Consultation = new Schema({
     comments: String,
     prescription: String,
     date: { type: Date, default: Date.now },
@@ -11,4 +11,4 @@ var ConsultationSchema   = new Schema({
     doctorID: mongoose.Schema.Types.ObjectId
 });
 
-module.exports = mongoose.model('consultation', ConsultationSchema);
+module.exports = mongoose.model('consultation', Consultation);

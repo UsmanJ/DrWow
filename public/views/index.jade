@@ -17,6 +17,9 @@ block content
               a.button.small.success(href='#') SERVICES
 
             li
+              a.button.small.success(href='#') CONTACT US
+
+            li
               a.button.small.success(href="/login") LOGIN
 
             li
@@ -107,11 +110,24 @@ block content
               a.button.small.success(href='#') MONITOR YOUR HEALTH
 
             li
-              a.button.small.success(href="/login") CLINICAL RECORDS
+              a.button.small.success(href='#') CLINICAL RECORDS
 
             li
               a.button.small.success(href="/logout") LOGOUT
           hr
+
+    .row
+      .large-12.columns
+        .panel
+          h4 Get in touch!
+
+          .row
+            .large-9.columns
+              p We&apos;d love to hear from you, you attractive person you.
+
+            .large-3.columns
+              a.button.small.success.right(href='#') CONTACT US
+
 
   if(params.user && params.user.role === 'doctor')
     .row
@@ -126,14 +142,26 @@ block content
               a.button.small.success(href='/session') ATTEND A PATIENT
 
             li
-              a.button.small.success(href='#') MONITOR YOUR HEALTH
+              a.button.small.success(href='#') PATIENT RECORDS
 
             li
-              a.button.small.success(href="/login") CLINICAL RECORDS
+              a.button.small.success(href='#') SURGERY NEWS
 
             li
               a.button.small.success(href="/logout") LOGOUT
             hr
+
+    .row
+      .large-12.columns
+        .panel
+          h4 Get in touch!
+
+          .row
+            .large-9.columns
+              p We&apos;d love to hear from you, you attractive person you.
+
+            .large-3.columns
+              a.button.small.success.right(href='#') CONTACT US
 
 
 

@@ -1,9 +1,10 @@
 var express = require('express');
 var passport = require('passport');
 var Account = require('../app/models/account');
-var Consultation = require('../app/models/consultation');
 var router = express.Router();
 var nodemailer = require("nodemailer");
+var mandrill = require('mandrill-api/mandrill');
+var mandrill_client = new mandrill.Mandrill('TrfRWARNNDbLYLENx_chjQ');
 var mandrillTransport = require('nodemailer-mandrill-transport');
 var patients_array = [];
 var doctors_array = [];
@@ -22,25 +23,67 @@ function isAuthenticated(req, res, next) {
     res.redirect('/');
 }
 
-var transport = nodemailer.createTransport(mandrillTransport({
-  auth: {
-    apiKey: 'TrfRWARNNDbLYLENx_chjQ'
-  }
-}));
-
 function sendMail(emailData) {
   console.log(emailData);
-  transport.sendMail({
-    from: 'DrWoW@DrWoW.com',
-    to: emailData.email,
-    subject: 'The Doctor will see you now now now',
-    html: emailData.message
-  }, function(err, info) {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log(info);
-    }
+  var message = {
+      "html": "<p> Hello world </p>"
+      "text": emailData.message,
+      "subject": "example subject",
+      "from_email": "message.from_email@example.com",
+      "from_name": "Example Name",
+      "to": [{
+              "email": emailData.email,
+              "name": "Recipient Name",
+              "type": "to"
+          }],
+      "headers": {
+          "Reply-To": "message.reply@example.com"
+      },
+      "important": false,
+      "track_opens": null,
+      "track_clicks": null,
+      "auto_text": null,
+      "auto_html": null,
+      "inline_css": null,
+      "url_strip_qs": null,
+      "preserve_recipients": null,
+      "view_content_link": null,
+      "bcc_address": "message.bcc_address@example.com",
+      "tracking_domain": null,
+      "signing_domain": null,
+      "return_path_domain": null,
+      "merge": true,
+      "merge_language": "mailchimp",
+      "global_merge_vars": [{
+              "name": "merge1",
+              "content": "merge1 content"
+          }],
+      "merge_vars": [{
+              "rcpt": "recipient.email@example.com",
+              "vars": [{
+                      "name": "merge2",
+                      "content": "merge2 content"
+                  }]
+          }],
+
+  };
+  var async = false;
+  var ip_pool = "Main Pool";
+  var send_at = "example send_at";
+  mandrill_client.messages.send({"message": message, "async": async, "ip_pool": ip_pool}, function(result) {
+      console.log(result);
+      /*
+      [{
+              "email": "recipient.email@example.com",
+              "status": "sent",
+              "reject_reason": "hard-bounce",
+              "_id": "abc123abc123abc123abc123abc123"
+          }]
+      */
+  }, function(e) {
+      // Mandrill returns the error as an object with name and message keys
+      console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+      // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
   });
 };
 
@@ -52,6 +95,7 @@ router.get('/session', function (req, res) {
     };
     if(req.user.role === 'doctor'){
       if(doctors_array.length === 0 || doctors_array.indexOf(req.user) !== -1) { doctors_array.push(req.user) };
+
     }else if(req.user.role === 'patient'){
       if(patients_array.length === 0 || patients_array.indexOf(req.user) !== -1) { patients_array.push(req.user) };
     };
@@ -105,33 +149,6 @@ router.get('/ping', function(req, res){
     res.status(200).send("pong!");
     // console.log("got to ping !!")
 });
-
-
-//--------------------------------------------------------------------------------
-
-router.post('/consultations', function(req, res) {
-
-    console.log(req.body.comments, req.body.prescription, req.body.date, req.body.patientID, req.body.doctorID )
-
-    var consultation = new Consultation();   // create a new instance of the Consultation model
-    consultation.comments = req.body.comments;  // set the consultation description (comes from the request)
-    consultation.prescription = req.body.prescription;
-    consultation.date = req.body.date;
-    consultation.patientID = req.body.patientID; //pass in id as string eg.JSON in request body = {"description":"TEST2", "patientID": "563a1a850d5fa4860f26d81c"}
-    consultation.doctorID = req.body.doctorID;
-
-    console.log(consultation);
-
-    // save the consultation and check for errors
-    consultation.save(function(err) {
-        if (err)
-          res.send(err);
-
-    res.redirect('/');
-
-    });
-})
-//---------------------------------------------------------------
 
 router.get('/emailform', function(req, res){
     res.render('emailform', { user : req.user });

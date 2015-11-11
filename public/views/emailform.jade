@@ -2,7 +2,7 @@ extends layout
 
 block content
   .container
-    div(ng-controller='MainCtrl')
+    div(ng-controller='EmailCtrl')
       h1
         | Prescription Form
         .content
@@ -11,7 +11,7 @@ block content
             p
               label#name(for='name') Name:
               br
-              input#name(name='name', type='text', value='', ng-model="patname")
+              input#name(name='name1', type='text', value='', ng-model="patname")
             p
               label(for='email') Email:
               br

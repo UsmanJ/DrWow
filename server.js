@@ -3,13 +3,13 @@ var nodemailer = require("nodemailer");
 var OpenTok = require('opentok'),
     opentok = new OpenTok(process.env.apiKey,process.env.apiSecret);
 var app = express();
-var smtpTransport = nodemailer.createTransport("SMTP",{
-service: "Gmail",
-auth: {
-user: "drwowmd@gmail.com",
-pass: "123makers"
-}
-});
+// var smtpTransport = nodemailer.createTransport("SMTP",{
+// service: "Gmail",
+// auth: {
+// user: "drwowmd@gmail.com",
+// pass: "123makers"
+// }
+// });
 var passport = require('passport');
 var path = require('path');
 var flash = require('connect-flash');
@@ -93,12 +93,7 @@ app.get('/joinSession', function(req, res) {
 
 var mongoose = require('mongoose');
 cfg = require('./config');
-console.log(cfg);
 db = mongoose.connect(cfg.mongo.db); // connect to our database
-
-
-console.log(db)
-console.log(db.connection.readyState); //logs connection status to db - 0 is disconnected, 1 is connected, 2 is connecting
 
 var User = require('./app/models/account');
 var Consultation = require('./app/models/consultation');

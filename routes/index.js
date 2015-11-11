@@ -24,11 +24,12 @@ var transport = nodemailer.createTransport(mandrillTransport({
   }
 }));
 
-function sendMail() {
+function sendMail(emailTosend) {
+  console.log(emailTosend);
   transport.sendMail({
     from: 'DrWoW@DrWoW.com',
-    to: 'philip.clarke@redhood.co.uk',
-    subject: 'The Doctor will see you now',
+    to: emailTosend,
+    subject: 'The Doctor will see you now now now',
     html: '<p>Hello ?</p>'
   }, function(err, info) {
     if (err) {
@@ -76,7 +77,7 @@ router.get('/logout', function(req, res) {
 
 router.get('/ping', function(req, res){
     res.status(200).send("pong!");
-    console.log("got to ping !!")
+    // console.log("got to ping !!")
 });
 
 router.get('/emailform', function(req, res){
@@ -84,8 +85,11 @@ router.get('/emailform', function(req, res){
 });
 
 router.post('/email',function(req,res){
-  sendMail();
-  // console.log("are we done here?");
+  // console.log(req.body.email);
+  var emailTosend = req.body.email
+  console.log(emailTosend);
+  sendMail(emailTosend);
+  //  console.log("are we done here?");
   // transport.close();
   res.redirect('/ping')
   // server.

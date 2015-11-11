@@ -17,53 +17,70 @@ block content
               a.button.small.success(href='#') SERVICES
 
             li
+              a.button.small.success(href='#') CONTACT US
+
+            li
               a.button.small.success(href="/login") LOGIN
 
             li
               a.button.small.success(href="/register") REGISTER
 
-              hr
     .row
         ul(data-orbit='')
             li
-                img(src='img/img1.png', height='200', width='600')
+                img(src='img/img1.png', height='200', width='800')
 
               li.active
-                img(src='img/img1.png', height='200', width='600')
+                img(src='img/img1.png', height='200', width='800')
 
               li
-                img(src='img/img1.png', height='200', width='600')
+                img(src='img/img1.png', height='200', width='800')
+          hr
 
-    h4(align='center') Meet Our Doctors</br>
+    h4(align='center') Meet Our Doctors
+      br
+      br
     .row
         .large-4.columns
-            img(src='img/img11.png', height='410', width='100')
-
+            img(src='img/img11.jpg', height='400', width='300')
+            br
+            br
             h4(align='center') Dr Nikesh
             p(align='center')
                “I'm passionate about being a GP and also about using technology to improve health, so I'm thrilled to be part of the DrWow team delivering revolutionary, high quality medical care when and where it is needed. Not in the future, but right now.”
 
           .large-4.columns
-            img(src='http://placehold.it/400x300&text=[img]')
-
+            img(src='img/img12.jpg', height='400', width='300')
+            br
+            br
             h4(align='center') Dr Smash
-
             p(align='center')
                "DrWow is an innovative service for busy individuals who need to see a doctor when it suits them. To be part of this health revolution is exciting and seeing DrWow’s growth is testament to the high quality service it provides."
 
-
           .large-4.columns
-            img(src='http://placehold.it/400x300&text=[img]')
-
-            h4(align='center') Dr Patel
-
+            img(src='img/img13.jpg', height='400', width='300')
+            br
+            br
+            h4(align='center') Dr Philip
             p(align='center')
-               "DrWow is an excellent way to get an answer to a medical question that you’ve always wanted to ask. I relish the opportunity to provide a great service to patients that is not limited by a practice boundary.” <br/>
+               "DrWow is an excellent way to get an answer to a medical question that you’ve always wanted to ask. I relish the opportunity to provide a great service to patients that is not limited by a practice boundary.”
+               br
+               br
 
-      
+          hr
+        br
+
+      .row
+          .large-12.columns
+              img(src='http://placehold.it/1000x400&text=Slide Image alt=slide image')
+              br
+              br
+              br
 
 
-          p(align='center') AWARDS
+    h4(align='center') AWARDS
+            br
+            br
 
           .row(align='center')
               .large-4.columns
@@ -76,29 +93,6 @@ block content
                   img(src='img/img10.jpg', height='200', width='200')
 
 
-            hr
-
-  if(params.user && params.user.role === 'doctor')
-    .row
-        .small-5.medium-4.large-3.columns
-          h1
-            a(href="/")
-              img(src='img/DrWow.jpg')
-        .large-9.columns
-          ul.right.button-group
-
-            li
-              a.button.small.success(href='/session') ATTEND A PATIENT
-
-            li
-              a.button.small.success(href='#') MONITOR YOUR HEALTH
-
-            li
-              a.button.small.success(href="/login") CLINICAL RECORDS
-
-            li
-              a.button.small.success(href="/logout") LOGOUT
-            hr
 
   if(params.user && params.user.role === 'patient')
     .row
@@ -116,28 +110,59 @@ block content
               a.button.small.success(href='#') MONITOR YOUR HEALTH
 
             li
-              a.button.small.success(href="/login") CLINICAL RECORDS
+              a.button.small.success(href='#') CLINICAL RECORDS
+
+            li
+              a.button.small.success(href="/logout") LOGOUT
+          hr
+
+    .row
+      .large-12.columns
+        .panel
+          h4 Get in touch!
+
+          .row
+            .large-9.columns
+              p We&apos;d love to hear from you, you attractive person you.
+
+            .large-3.columns
+              a.button.small.success.right(href='#') CONTACT US
+
+
+  if(params.user && params.user.role === 'doctor')
+    .row
+        .small-5.medium-4.large-3.columns
+          h1
+            a(href="/")
+              img(src='img/DrWow.jpg')
+        .large-9.columns
+          ul.right.button-group
+
+            li
+              a.button.small.success(href='/session') ATTEND A PATIENT
+
+            li
+              a.button.small.success(href='#') PATIENT RECORDS
+
+            li
+              a.button.small.success(href='#') SURGERY NEWS
 
             li
               a.button.small.success(href="/logout") LOGOUT
             hr
 
+    .row
+      .large-12.columns
+        .panel
+          h4 Get in touch!
 
+          .row
+            .large-9.columns
+              p We&apos;d love to hear from you, you attractive person you.
 
+            .large-3.columns
+              a.button.small.success.right(href='#') CONTACT US
 
-
-
-  .row
-    .large-12.columns
-      .panel
-        h4 Get in touch!
-
-        .row
-          .large-9.columns
-            p We&apos;d love to hear from you, you attractive person you.
-
-          .large-3.columns
-            a.button.small.success.right(href='#') CONTACT US
 
 
   footer.row

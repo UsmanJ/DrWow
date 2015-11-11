@@ -19,19 +19,19 @@ block content
               section#panel2-1.content.active(role='tabpanel', aria-hidden='false')
                 form(role='form', action="/register",method="post", style='max-width: 300px;')
                   .form-group
-                      input.form-control(type='text', name="fullname", placeholder='Enter Name')
+                      input.form-control(type='text', name="fullname", placeholder='Name')
                   .form-group
-                      input.form-control(type='text', name="email", placeholder='Enter Email')
+                      input.form-control(type='text', name="email", placeholder='Email')
                   .form-group
                       select(name='gender')
                         option(value='male') Male
                         option(value='female') Female
                   .form-group
-                      input.form-control(type='text', name="age", placeholder='Enter Age')
+                      input.form-control(type='text', name="age", placeholder='Age')
                   .form-group
-                      input.form-control(type='text', name="address", placeholder='Enter Address')
+                      input.form-control(type='text', name="address", placeholder='Address')
                   .form-group
-                      input.form-control(type='text', name="username", placeholder='Enter Username', id='username')
+                      input.form-control(type='text', name="username", placeholder='Username', id='username')
                   .form-group
                       input.form-control(type='password', name="password", placeholder='Password', id='password')
                   .form-group
@@ -43,13 +43,13 @@ block content
               section#panel2-2.content(role='tabpanel', aria-hidden='true')
                 form(role='form', action="/register",method="post", style='max-width: 300px;')
                   .form-group
-                      input.form-control(type='text', name="fullname", placeholder='Enter Name')
+                      input.form-control(type='text', name="fullname", placeholder='Name')
                   .form-group
-                      input.form-control(type='text', name="email", placeholder='Enter Email')
+                      input.form-control(type='text', name="email", placeholder='Email')
                   .form-group
-                      input.form-control(type='text', name="gmcRef", placeholder='Enter GMC Reference Number')
+                      input.form-control(type='text', name="gmcRef", placeholder='GMC Reference Number')
                   .form-group
-                      input.form-control(type='text', name="username", placeholder='Enter Username', id='username')
+                      input.form-control(type='text', name="username", placeholder='Username', id='username')
                   .form-group
                       input.form-control(type='password', name="password", placeholder='Password', id='password')
                   .form-group
@@ -58,3 +58,29 @@ block content
                   &nbsp;
                   a(href='/')
                     button.small.secondary(type="button") Cancel
+
+
+              footer.row
+                .large-12.columns
+                  hr
+
+                  .row
+                    .large-6.columns
+                      p &copy; Copyright 2015 DrWow
+
+                    .large-6.columns
+                      ul.inline-list.right
+                        li
+                          a(href='#') Team
+
+                        li
+                          a(href='#') Careers
+
+                        li
+                          a(href='#') T&Cs
+
+                        li
+                          a(href='#') Privacy Policy
+
+                        li
+                          a(href='#') FAQ

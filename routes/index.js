@@ -23,12 +23,6 @@ function isAuthenticated(req, res, next) {
     res.redirect('/');
 }
 
-// var transport = nodemailer.createTransport(mandrillTransport({
-//   auth: {
-//     apiKey: 'TrfRWARNNDbLYLENx_chjQ'
-//   }
-// }));
-
 function sendMail(emailData) {
   console.log(emailData);
   var message = {
@@ -93,9 +87,6 @@ function sendMail(emailData) {
   });
 };
 
-
-
-
 router.get('/session', function (req, res) {
     if(req.user === undefined){
       res.redirect('/');
@@ -104,7 +95,7 @@ router.get('/session', function (req, res) {
     };
     if(req.user.role === 'doctor'){
       if(doctors_array.length === 0 || doctors_array.indexOf(req.user) !== -1) { doctors_array.push(req.user) };
-      console.log(doctors_array)
+
     }else if(req.user.role === 'patient'){
       if(patients_array.length === 0 || patients_array.indexOf(req.user) !== -1) { patients_array.push(req.user) };
     };
@@ -118,8 +109,14 @@ router.get('/', function (req, res) {
     if(req.user === undefined){
       res.render('index', { params : { user : req.user }});
     } else if(req.user !== undefined){
+      if(req.user.role === 'doctor'){
+        doctors_array.length = 0;
+      }else if(req.user.role === 'patient'){
+        patients_array.length = 0;
+      };
       res.render('index', { params : { user : req.user }});
     };
+
 });
 
 router.post('/register', function(req, res) {

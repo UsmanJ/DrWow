@@ -20,8 +20,7 @@ var connectionCount = 0;
 
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-var users = require('./routes/consultations');
+
 
 app.set('views', path.join(__dirname + '/public/views'));
 app.set('view engine', 'jade');

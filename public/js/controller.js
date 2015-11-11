@@ -16,6 +16,9 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
   var connectionCount = 0;
   var sessionRunning = false;
 
+  var options = {width: 400, height: 300, insertMode: 'append'}
+  var publisherContainer = OT.initPublisher('publisherContainerID', options);
+
   self.createSession = function(){
     $http({
   method: 'GET',
@@ -27,7 +30,7 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
     if(err){
       alert("there is an error!");
     }else{
-      session.publish("publisherContainer");
+      session.publish(publisherContainer);
       sessionRunning = true;
       layout();
     }
@@ -42,11 +45,9 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
     });
   };
   session.on("streamCreated", function(event){
-    session.subscribe( event.stream, "layoutContainer", {
-      insertMode: "append"
-   });
-   layout();
- });
+    session.subscribe( event.stream, "layoutContainer", options);
+    layout();
+  });
   session.on({
     connectionCreated: function (event) {
       connectionCount++;
@@ -70,7 +71,7 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
   });
  };
 
- self.joinSession = function(){
+  self.joinSession = function(){
      $http({
    method: 'GET',
    url: '/joinSession'
@@ -80,37 +81,17 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
    session.connect( response.data.token, function(err) {
      if(err){
        alert("there is an error!");
-     }else if (connectionCount === 2){
-       alert("already two people in this session!");
      }else{
        console.log('You have connected to the session.');
-       session.publish("publisherContainer");
+       session.publish(publisherContainer);
        layout();
      }
    });
    session.on("streamCreated", function(event){
-    session.subscribe( event.stream, "layoutContainer", {
-      insertMode: "append"
-    });
-    layout();
-  });
-  //  session.on({
-  //    connectionCreated: function (event) {
-  //      connectionCount++;
-  //      console.log(connectionCount + ' connections.');
-  //    },
-  //    connectionDestroyed: function (event) {
-  //      connectionCount--;
-  //      console.log(connectionCount + ' connections.');
-  //    },
-  //    sessionDisconnected: function sessionDisconnectHandler(event) {
-  //      // The event is defined by the SessionDisconnectEvent class
-  //      console.log('Disconnected from the session.');
-  //      if (event.reason == 'networkDisconnected') {
-  //        alert('Your network connection terminated.')
-  //      }
-  //    }
-  //  });
+     session.subscribe( event.stream, "layoutContainer", options);
+     layout();
+   });
+
     self.disconnect = function() {
       session.disconnect();
     };
@@ -118,7 +99,7 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
      // called asynchronously if an error occurs
      // or server returns response with an error status.
    });
- };
+  };
 
 }]).value({
     apiKey: '45396692'

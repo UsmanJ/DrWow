@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var Account = require('../app/models/account');
+var Consultation = require('../app/models/consultation');
 var router = express.Router();
 
 var patients_array = [];
@@ -67,5 +68,30 @@ router.get('/logout', function(req, res) {
 router.get('/ping', function(req, res){
     res.status(200).send("pong!");
 });
+
+//--------------------------------------------------------------------------------
+
+router.post('/consultations', function(req, res) {
+
+    console.log(req.body.comments, req.body.prescription, req.body.date, req.body.patientID, req.body.doctorID )
+
+    var consultation = new Consultation();   // create a new instance of the Consultation model
+    consultation.comments = req.body.comments;  // set the consultation description (comes from the request)
+    consultation.prescription = req.body.prescription;
+    consultation.date = req.body.date;
+    consultation.patientID = req.body.patientID; //pass in id as string eg.JSON in request body = {"description":"TEST2", "patientID": "563a1a850d5fa4860f26d81c"}
+    consultation.doctorID = req.body.doctorID;
+
+    console.log(consultation);
+
+    // save the consultation and check for errors
+    consultation.save(function(err) {
+        if (err)
+          res.send(err);
+
+    // res.redirect('/');
+
+    });
+})
 
 module.exports = router;

@@ -26,9 +26,11 @@ block content
 
     .row
       if(params.user.role === "doctor")
-        .large-12.columns
+        .large-6.columns
+          #publisherContainerID
+        .large-6.columns
           #layoutContainer
-            #publisherContainer
+        .large-12.columns
           div(ng-controller='DrCtrl as dr')
             button.small.secondary(ng-click='dr.createSession()', ng-hide='') Create Call
             button.small.secondary(ng-click='dr.forceDisconnect()') Force Disconnect
@@ -36,7 +38,8 @@ block content
             p No patients online
           else
             p Your patient is #{params.patients_array[0].username}
-            form(role='form', action="/consultation",method="post", style='max-width: 300px;')
+
+            form(role='form', action="/consultations", method="post", style='max-width: 300px;')
               .form-group
                   input.form-control(type='text', name="comments", placeholder='Enter Comments', id='comments')
               .form-group
@@ -44,20 +47,20 @@ block content
               .form-group
                 input.form-control(type='date', name="date", id='date')
               .form-group
-                  input.form-control(type='hidden', readonly="readonly", name="doctor", value='(#{params.user._id})', id='role')
+                  input.form-control(type='hidden', readonly="readonly", name="doctorID", value='#{params.user._id}', id='role')
               .form-group
-                  input.form-control(type='hidden', readonly="readonly", name="patient", value='(#{params.patients_array[0]._id})', id='role')
+                  input.form-control(type='hidden', readonly="readonly", name="patientID", value='#{params.patients_array[0]._id}', id='role')
               button.small.secondary(type='submit', id='submit') Submit
 
       if(params.user.role === "patient")
-        if(params.doctors_array.length === 0)
-          p No doctors online
-        else
-          p Your doctor is #{params.doctors_array[0].username}
-          #layoutContainer
+        .large-12.columns
+          if(params.doctors_array.length === 0)
+            p No doctors online
+          else
+            p Your doctor is #{params.doctors_array[0].username}
             #publisherContainer
-          div(ng-controller='DrCtrl as dr')
-            button.small.secondary(ng-click='dr.joinSession()') Join Call
+            div(ng-controller='DrCtrl as dr')
+              button.small.secondary(ng-click='dr.joinSession()') Join Call
 
 
   footer.row

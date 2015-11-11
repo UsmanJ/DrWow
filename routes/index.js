@@ -27,7 +27,7 @@ var transport = nodemailer.createTransport(mandrillTransport({
 function sendMail() {
   transport.sendMail({
     from: 'DrWoW@DrWoW.com',
-    to: 'alexlemons1@gmail.com',
+    to: 'philip.clarke@redhood.co.uk',
     subject: 'The Doctor will see you now',
     html: '<p>Hello ?</p>'
   }, function(err, info) {
@@ -78,9 +78,12 @@ router.get('/ping', function(req, res){
     res.status(200).send("pong!");
     console.log("got to ping !!")
 });
-//
 
-router.get('/email',function(req,res){
+router.get('/emailform', function(req, res){
+    res.render('emailform', { user : req.user });
+});
+
+router.post('/email',function(req,res){
   sendMail();
   // console.log("are we done here?");
   // transport.close();

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .container
+    div(ng-controller='MainCtrl')
+      h1
+        | Prescription Form
+        .content
+        form
+          fieldset
+            p
+              label#name(for='name') Name:
+              br
+              input#name(name='name', type='text', value='', ng-model="patname")
+            p
+              label(for='email') Email:
+              br
+              input#email(name='email', type='text', value='', ng-model="email")
+            p
+              label(for='message') Message:
+              br
+              textarea#message(name='message', cols='40', rows='10', ng-model="message")
+            p
+              input#submit(name='submit', type='submit', value='send' ng-click="submitEmail();")

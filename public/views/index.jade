@@ -1,31 +1,49 @@
 extends layout
 
 block content
-  if (!user)
-    a(href="/login") Login
-    br
-    a(href="/register") Register
-  if (user)
-    h1 You are currently logged in as #{user.username} - #{user.role}
+  if(!params.user)
+    .row
+        .large-3.columns
+          h1
+            img(src='img/DrWow.jpg')
+        .large-9.columns
+            ul.button-group.right
+              li
+                a.button.small.success(href="/login") Login
+              li
+                a.button.small.success(href="/register") Register
+  if(params.user)
+    .row
+        .large-3.columns
+          h1
+            img(src='img/DrWow.jpg')
+        .large-9.columns
+            ul.button-group.right
+              li
+                a.button.small.success(href="/logout") Logout
+        .large-12.columns
+            hr
 
-    p You are currently logged in as #{user.username}
-    p You are currently logged in as #{user.role}
-    a(href="/logout") Logout
-    if(user.role === "patient")
+    .row
+      h2 Welcome back #{params.user.name}
+      if(params.user.role === "doctor")
+        .large-12.columns
+          &nbsp;
+          a(href='/session')
+            button.small.secondary(type="button") Attend Patients
 
-      body.container
-        h2 Welcome
-        #layoutContainer
-          #publisherContainer
-        div(ng-controller='DrCtrl as dr')
-          button.button.button-full.button-dark(ng-click='dr.joinSession()') Join Call
 
-    if(user.role === "doctor")
 
-      body.container
-        h2 Welcome
-        #layoutContainer
-          #publisherContainer
-        div(ng-controller='DrCtrl as dr')
-          button.button.button-full.button-dark(ng-click='dr.createSession()', ng-hide='') Create Call
-          button.button.button-full.button-dark(ng-click='dr.forceDisconnect()') Force Disconnect
+      if(params.user.role === "patient")
+        .large-12.columns
+          &nbsp;
+          a(href='/session')
+            button.small.secondary(type="button") Speak to a Dr
+
+
+  footer.row
+    .large-12.columns
+      hr
+      .row
+        .large-6.columns
+          p DrWow

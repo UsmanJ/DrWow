@@ -35,14 +35,8 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
       layout();
     }
   });
-  self.forceDisconnect = function() {
-    session.forceDisconnect(connection, function (error) {
-    if (error) {
-        console.log(error);
-      } else {
-        console.log("Connection forced to disconnect: " + connection.id);
-      }
-    });
+  self.disconnect = function() {
+    session.disconnect();
   };
   session.on("streamCreated", function(event){
     session.subscribe( event.stream, "layoutContainer", options);

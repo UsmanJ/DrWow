@@ -22,105 +22,63 @@ block content
             li
               a.button.small.success(href="/register") REGISTER
 
-
-        .row
-            ul(data-orbit='')
-                li
-                    img(src='img/img1.png', height='200', width='600')
-
-                  li.active
-                    img(src='img/img1.png', height='200', width='600')
-
-                  li
-                    img(src='img/img1.png', height='200', width='600')
-
               hr
+    .row
+        ul(data-orbit='')
+            li
+                img(src='img/img1.png', height='200', width='600')
 
-        p(align='center') MEET OUT DOCTORS
+              li.active
+                img(src='img/img1.png', height='200', width='600')
 
-        .row
-            .large-4.columns
-                img(src='http://placehold.it/400x300&text=[img]')
+              li
+                img(src='img/img1.png', height='200', width='600')
 
-                h4(align='center') Dr Nikesh
-                p(align='center')
-                   “I'm passionate about being a GP and also about using technology to improve health, so I'm thrilled to be part of the DrWow team delivering revolutionary, high quality medical care when and where it is needed. Not in the future, but right now.”
+    h4(align='center') Meet Our Doctors</br>
+    .row
+        .large-4.columns
+            img(src='img/img11.png', height='410', width='100')
 
+            h4(align='center') Dr Nikesh
+            p(align='center')
+               “I'm passionate about being a GP and also about using technology to improve health, so I'm thrilled to be part of the DrWow team delivering revolutionary, high quality medical care when and where it is needed. Not in the future, but right now.”
+
+          .large-4.columns
+            img(src='http://placehold.it/400x300&text=[img]')
+
+            h4(align='center') Dr Smash
+
+            p(align='center')
+               "DrWow is an innovative service for busy individuals who need to see a doctor when it suits them. To be part of this health revolution is exciting and seeing DrWow’s growth is testament to the high quality service it provides."
+
+
+          .large-4.columns
+            img(src='http://placehold.it/400x300&text=[img]')
+
+            h4(align='center') Dr Patel
+
+            p(align='center')
+               "DrWow is an excellent way to get an answer to a medical question that you’ve always wanted to ask. I relish the opportunity to provide a great service to patients that is not limited by a practice boundary.” <br/>
+
+      
+
+
+          p(align='center') AWARDS
+
+          .row(align='center')
+              .large-4.columns
+                  img(src='img/img8.png', height='200', width='200')
 
               .large-4.columns
-                img(src='http://placehold.it/400x300&text=[img]')
-
-                h4(align='center') Dr Smash
-
-                p(align='center')
-                   "DrWow is an innovative service for busy individuals who need to see a doctor when it suits them. To be part of this health revolution is exciting and seeing DrWow’s growth is testament to the high quality service it provides."
-
+                  img(src='img/img9.jpg', height='200', width='200')
 
               .large-4.columns
-                img(src='http://placehold.it/400x300&text=[img]')
-
-                h4(align='center') Dr Patel
-
-                p(align='center')
-                   "DrWow is an excellent way to get an answer to a medical question that you’ve always wanted to ask. I relish the opportunity to provide a great service to patients that is not limited by a practice boundary.” <br/>
-
-              hr
+                  img(src='img/img10.jpg', height='200', width='200')
 
 
-        p(align='center') AWARDS
-
-        .row(align='center')
-            .large-4.columns
-                img(src='img/img8.png', height='200', width='200')
-
-            .large-4.columns
-                img(src='img/img9.jpg', height='200', width='200')
-
-            .large-4.columns
-                img(src='img/img10.jpg', height='200', width='200')
-
-
-              hr
-
-        .row
-          .large-12.columns
-            .panel
-              h4 Get in touch!
-
-              .row
-                .large-9.columns
-                  p We&apos;d love to hear from you, you attractive person you.
-
-                .large-3.columns
-                  a.button.small.success.right(href='#') CONTACT US
-
-
-        footer.row
-          .large-12.columns
             hr
 
-            .row
-              .large-6.columns
-                p &copy; Copyright 2015 DrWow
-
-              .large-6.columns
-                ul.inline-list.right
-                  li
-                    a(href='#') Team
-
-                  li
-                    a(href='#') Careers
-
-                  li
-                    a(href='#') T&Cs
-
-                  li
-                    a(href='#') Privacy Policy
-
-                  li
-                    a(href='#') FAQ
-
-  if(params.user)
+  if(params.user && params.user.role === 'doctor')
     .row
         .small-5.medium-4.large-3.columns
           h1
@@ -130,7 +88,7 @@ block content
           ul.right.button-group
 
             li
-              a.button.small.success(href='#') BOOK A CONSULTATION
+              a.button.small.success(href='/session') ATTEND A PATIENT
 
             li
               a.button.small.success(href='#') MONITOR YOUR HEALTH
@@ -142,52 +100,67 @@ block content
               a.button.small.success(href="/logout") LOGOUT
             hr
 
+  if(params.user && params.user.role === 'patient')
     .row
-      h2 Welcome #{params.user.name}
-      if(params.user.role === "doctor")
-        .large-12.columns
-          &nbsp;
-          a(href='/session')
-            button.small.secondary(type="button") Attend Patients
+        .small-5.medium-4.large-3.columns
+          h1
+            a(href="/")
+              img(src='img/DrWow.jpg')
+        .large-9.columns
+          ul.right.button-group
 
+            li
+              a.button.small.success(href='/session') SPEAK TO A DOCTOR
 
-      if(params.user.role === "patient")
+            li
+              a.button.small.success(href='#') MONITOR YOUR HEALTH
 
-        if(params.doctors_array.length === 0)
-          p No doctors online
-        else
-          p Your doctor is #{params.doctors_array[0].username}
-          #layoutContainer
-            #publisherContainer
-          div(ng-controller='DrCtrl as dr')
-            button.small.secondary(ng-click='dr.joinSession()') Join Call
+            li
+              a.button.small.success(href="/login") CLINICAL RECORDS
 
-        .large-12.columns
-          &nbsp;
-          a(href='/session')
-            button.small.secondary(type="button") Speak to a Doctor
-
-        footer.row
-          .large-12.columns
+            li
+              a.button.small.success(href="/logout") LOGOUT
             hr
 
-            .row
-              .large-6.columns
-                p &copy; Copyright 2015 DrWow
 
-              .large-6.columns
-                ul.inline-list.right
-                  li
-                    a(href='#') Team
 
-                  li
-                    a(href='#') Careers
 
-                  li
-                    a(href='#') T&Cs
 
-                  li
-                    a(href='#') Privacy Policy
 
-                  li
-                    a(href='#') FAQ
+  .row
+    .large-12.columns
+      .panel
+        h4 Get in touch!
+
+        .row
+          .large-9.columns
+            p We&apos;d love to hear from you, you attractive person you.
+
+          .large-3.columns
+            a.button.small.success.right(href='#') CONTACT US
+
+
+  footer.row
+    .large-12.columns
+      hr
+
+      .row
+        .large-6.columns
+          p &copy; Copyright 2015 DrWow
+
+        .large-6.columns
+          ul.inline-list.right
+            li
+              a(href='#') Team
+
+            li
+              a(href='#') Careers
+
+            li
+              a(href='#') T&Cs
+
+            li
+              a(href='#') Privacy Policy
+
+            li
+              a(href='#') FAQ

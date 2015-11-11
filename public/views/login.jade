@@ -2,16 +2,15 @@ extends layout
 
 block content
   .row
-      .large-12.columns
+      .small-5.medium-4.large-3.columns
         h1
           img(src='img/DrWow.jpg')
-      .large-12.columns
-          hr
+      .small-12.columns
+        hr
 
   .row
       .large-12.columns
-        h1 Login Page
-        p.lead Say something worthwhile here.
+        h1 Log In
         br
         form(role='form', action="/login",method="post", style='max-width: 300px;')
           .form-group
@@ -22,10 +21,3 @@ block content
           &nbsp;
           a(href='/')
             button.small.secondary(type="button") Cancel
-
-  footer.row
-    .large-12.columns
-      hr
-      .row
-        .large-6.columns
-          p DrWow

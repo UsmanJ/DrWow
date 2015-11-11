@@ -24,13 +24,13 @@ var transport = nodemailer.createTransport(mandrillTransport({
   }
 }));
 
-function sendMail(emailTosend) {
-  console.log(emailTosend);
+function sendMail(emailData) {
+  console.log(emailData);
   transport.sendMail({
     from: 'DrWoW@DrWoW.com',
-    to: emailTosend,
+    to: emailData.email,
     subject: 'The Doctor will see you now now now',
-    html: '<p>Hello ?</p>'
+    html: emailData.message
   }, function(err, info) {
     if (err) {
       console.error(err);
@@ -87,8 +87,9 @@ router.get('/emailform', function(req, res){
 router.post('/email',function(req,res){
   // console.log(req.body.email);
   var emailTosend = req.body.email
-  console.log(emailTosend);
-  sendMail(emailTosend);
+  var emailData = req.body
+  console.log(emailData);
+  sendMail(emailData);
   //  console.log("are we done here?");
   // transport.close();
   res.redirect('/ping')

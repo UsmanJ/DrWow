@@ -2,7 +2,6 @@ var express = require('express');
 var passport = require('passport');
 var Account = require('../app/models/account');
 var router = express.Router();
-var nodemailer = require("nodemailer");
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill('TrfRWARNNDbLYLENx_chjQ');
 var mandrillTransport = require('nodemailer-mandrill-transport');

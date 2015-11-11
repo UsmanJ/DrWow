@@ -1,15 +1,7 @@
 var express = require('express');
-var nodemailer = require("nodemailer");
 var OpenTok = require('opentok'),
     opentok = new OpenTok(process.env.apiKey,process.env.apiSecret);
 var app = express();
-// var smtpTransport = nodemailer.createTransport("SMTP",{
-// service: "Gmail",
-// auth: {
-// user: "drwowmd@gmail.com",
-// pass: "123makers"
-// }
-// });
 var passport = require('passport');
 var path = require('path');
 var flash = require('connect-flash');
@@ -21,7 +13,6 @@ var port = process.env.PORT || 8080;
 var session = require('express-session')
 var self = this;
 var sessionObj = null;
-// var LocalStrategy = require('passport-local').Strategy;
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var connectionCount = 0;

@@ -29,6 +29,7 @@ router.get('/session', function (req, res) {
     };
     if(req.user.role === 'doctor'){
       if(doctors_array.length === 0 || doctors_array.indexOf(req.user) !== -1) { doctors_array.push(req.user) };
+      console.log(doctors_array)
     }else if(req.user.role === 'patient'){
       if(patients_array.length === 0 || patients_array.indexOf(req.user) !== -1) { patients_array.push(req.user) };
     };

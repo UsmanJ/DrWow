@@ -21,16 +21,29 @@ function isAuthenticated(req, res, next) {
 }
 
 
-router.get('/', function (req, res) {
+router.get('/session', function (req, res) {
     if(req.user === undefined){
-      res.render('index', { params : { user : req.user, doctors_array : doctors_array, patients_array : patients_array}});
+      res.redirect('/');
     } else if(req.user !== undefined){
-      res.render('index', { params : { user : req.user, doctors_array : doctors_array, patients_array : patients_array }});
+      res.render('session', { params : { user : req.user, doctors_array : doctors_array, patients_array : patients_array }});
+    };
+    if(req.user.role === 'doctor'){
+      if(doctors_array.length === 0 || doctors_array.indexOf(req.user) !== -1) { doctors_array.push(req.user) };
+    }else if(req.user.role === 'patient'){
+      if(patients_array.length === 0 || patients_array.indexOf(req.user) !== -1) { patients_array.push(req.user) };
     };
 });
 
 router.get('/register', function(req, res) {
     res.render('register', { });
+});
+
+router.get('/', function (req, res) {
+    if(req.user === undefined){
+      res.render('index', { params : { user : req.user }});
+    } else if(req.user !== undefined){
+      res.render('index', { params : { user : req.user }});
+    };
 });
 
 router.post('/register', function(req, res) {
@@ -50,11 +63,6 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    if(req.user.role === 'doctor'){
-      if(doctors_array.length === 0 || doctors_array.indexOf(req.user) !== -1) { doctors_array.push(req.user) };
-    }else if(req.user.role === 'patient'){
-      if(patients_array.length === 0 || patients_array.indexOf(req.user) !== -1) { patients_array.push(req.user) };
-    };
     res.redirect('/');
 });
 

@@ -26,18 +26,18 @@ function isAuthenticated(req, res, next) {
 function sendMail(emailData) {
   console.log(emailData);
   var message = {
-      "html": "<p> Hello world </p>",
+      "html": emailData.message,
       "text": emailData.message,
-      "subject": "example subject",
-      "from_email": "message.from_email@example.com",
-      "from_name": "Example Name",
+      "subject": "Prescription",
+      "from_email": "dr@drwow.com",
+      "from_name": "Dr Wow",
       "to": [{
               "email": emailData.email,
               "name": "Recipient Name",
               "type": "to"
           }],
       "headers": {
-          "Reply-To": "message.reply@example.com"
+          "Reply-To": "help@drwow.com"
       },
       "important": false,
       "track_opens": null,
@@ -55,14 +55,14 @@ function sendMail(emailData) {
       "merge": true,
       "merge_language": "mailchimp",
       "global_merge_vars": [{
-              "name": "merge1",
-              "content": "merge1 content"
+              "name": "name",
+              "content": emailData.name
           }],
       "merge_vars": [{
               "rcpt": "recipient.email@example.com",
               "vars": [{
-                      "name": "merge2",
-                      "content": "merge2 content"
+                      "name": "name",
+                      "content": emailData.name
                   }]
           }],
 

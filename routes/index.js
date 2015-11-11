@@ -26,7 +26,7 @@ function isAuthenticated(req, res, next) {
 function sendMail(emailData) {
   console.log(emailData);
   var message = {
-      "html": "<p> Hello world </p>"
+      "html": "<p> Hello world </p>",
       "text": emailData.message,
       "subject": "example subject",
       "from_email": "message.from_email@example.com",

@@ -1,6 +1,6 @@
 drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($scope, OTSession, apiKey, $http) {
   var self = this;
-  var layoutContainer = document.getElementById("layoutContainer");
+  var layoutContainer = document.getElementById("layoutContainer", options);
   var layout = initLayoutContainer(document.getElementById("layoutContainer"), {
       maxRatio: 3/2,     // The narrowest ratio that will be used (default 2x3)
       minRatio: 9/16,      // The widest ratio that will be used (default 16x9)
@@ -39,7 +39,7 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
     session.disconnect();
   };
   session.on("streamCreated", function(event){
-    session.subscribe( event.stream, "layoutContainer", options);
+    session.subscribe( event.stream, layoutContainer, options);
     layout();
   });
   session.on({
@@ -82,7 +82,7 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
      }
    });
    session.on("streamCreated", function(event){
-     session.subscribe( event.stream, "layoutContainer", options);
+     session.subscribe( event.stream, layoutContainer, options);
      layout();
    });
 

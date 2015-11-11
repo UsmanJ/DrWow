@@ -65,8 +65,14 @@ router.get('/', function (req, res) {
     if(req.user === undefined){
       res.render('index', { params : { user : req.user }});
     } else if(req.user !== undefined){
+      if(req.user.role === 'doctor'){
+        doctors_array.length = 0;
+      }else if(req.user.role === 'patient'){
+        patients_array.length = 0;
+      };
       res.render('index', { params : { user : req.user }});
     };
+
 });
 
 router.post('/register', function(req, res) {

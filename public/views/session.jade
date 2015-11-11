@@ -3,90 +3,104 @@ extends layout
 block content
   if(!params.user)
     .row
-        .large-3.columns
+        .small-5.medium-4.large-3.columns
           h1
             img(src='img/DrWow.jpg')
-        .large-9.columns
+        .small-7.medium-8.large-9.columns
             ul.button-group.right
               li
                 a.button.small.success(href="/login") Login
               li
                 a.button.small.success(href="/register") Register
+          .small-12.columns
+              hr
   if(params.user)
     .row
-        .large-3.columns
+        .small-5.medium-4.large-3.columns
           h1
             img(src='img/DrWow.jpg')
-        .large-9.columns
+        .small-7.medium-8.large-9.columns
             ul.button-group.right
               li
                 a.button.small.success(href="/logout") Logout
-        .large-12.columns
+        .small-12.columns
             hr
 
-    .row
-      if(params.user.role === "doctor")
+    if(params.user.role === "doctor")
+      .row
+        .large-6.columns
+          #publisherContainerID
+        .large-6.columns
+          #secondContainerID
         .large-12.columns
-          #layoutContainer
-            #publisherContainer
+          hr
+
+        .large-12.columns
           if(params.patients_array.length === 0)
-            p No patients online
+            h3 No patients online
             <meta http-equiv="refresh" content="5" />
           else
-            form
-              .row.medium-uncollapse.large-collapse
-                .large-4.columns
-                  label
-                    | Patient's Name
-                    input(type='text', value='#{params.patients_array[0].name}', disabled='')
-                .large-4.columns
-                  label
-                    | Patient's Email Address
-                    input(type='text', value='#{params.patients_array[0].email}', disabled='')
-              .row.medium-uncollapse.large-collapse
-                .large-4.columns
-                  label
-                    | Patient's Gender
-                    input(type='text', value='#{params.patients_array[0].gender}', disabled='')
-                .large-4.columns
-                  label
-                    | Patient's Age
-                    input(type='text', value='#{params.patients_array[0].age}', disabled='')
+            h3 Your patient is #{params.patients_array[0].name}
 
 
             div(ng-controller='DrCtrl as dr')
               button.small.secondary(ng-click='dr.createSession()', ng-hide='') Create Call
               button.small.secondary(ng-click='dr.disconnect()') Disconnect
-            form(role='form', action="/consultation",method="post", style='max-width: 300px;')
-              .form-group
-                  input.form-control(type='text', name="comments", placeholder='Enter Comments', id='comments')
-              .form-group
-                  input.form-control(type='text', name="prescription", placeholder='Prescription', id='prescription')
-              .form-group
-                  input.form-control(type='date', name="date", id='date')
-              .form-group
-                  input.form-control(type='hidden', readonly="readonly", name="doctor", value='(#{params.user._id})', id='role')
-              .form-group
-                  input.form-control(type='hidden', readonly="readonly", name="patient", value='(#{params.patients_array[0]._id})', id='role')
-              button.small.secondary(type='submit', id='submit') Submit
+            form
+              .row.small-uncollapse.large-uncollapse
+                .medium-6.large-4.columns
+                  label
+                    | Patient's Name
+                    input(type='text', value='#{params.patients_array[0].name}', disabled='')
+                .medium-6.large-4.columns
+                  label
+                    | Patient's Email Address
+                    input(type='text', value='#{params.patients_array[0].email}', disabled='')
+              .row.small-uncollapse.large-uncollapse
+                .medium-6.large-4.columns
+                  label
+                    | Patient's Gender
+                    input(type='text', value='#{params.patients_array[0].gender}', disabled='')
+                .medium-6.large-4.columns
+                  label
+                    | Patient's Age
+                    input(type='text', value='#{params.patients_array[0].age}', disabled='')
 
-      if(params.user.role === "patient")
-        if(params.doctors_array.length === 0)
-          h3 No doctors online at the moment.
-          <meta http-equiv="refresh" content="5" />
-        else
-          h3 Your doctor is #{params.doctors_array[0].name}
-          #layoutContainer
-            #publisherContainer
-          div(ng-controller='DrCtrl as dr')
-            button.small.secondary(ng-click='dr.joinSession()') Join Call
-            &nbsp;
-            a(href='/')
-              button.small.secondary(ng-click='dr.disconnect()') Disconnect
+            .row
+              .large-12.columns
+                hr
+              .large-12.columns
+                form(role='form', action="/consultations", method="post", style='max-width: 300px;')
+                  .form-group
+                      input.form-control(type='text', name="comments", placeholder='Enter Comments', id='comments')
+                  .form-group
+                    input.form-control(type='text', name="prescription", placeholder='Prescription', id='prescription')
+                  .form-group
+                    input.form-control(type='date', name="date", id='date')
+                  .form-group
+                      input.form-control(type='hidden', readonly="readonly", name="doctorID", value='#{params.user._id}', id='role')
+                  .form-group
+                      input.form-control(type='hidden', readonly="readonly", name="patientID", value='#{params.patients_array[0]._id}', id='role')
+                  button.small.secondary(type='submit', id='submit') Submit
 
-  footer.row
-    .large-12.columns
-      hr
+    if(params.user.role === "patient")
       .row
         .large-6.columns
-          p DrWow
+          #publisherContainerID
+        .large-6.columns
+          #secondContainerID
+        .large-12.columns
+          hr
+
+        .large-12.columns
+          if(params.doctors_array.length === 0)
+            h3 No doctors online at the moment
+            <meta http-equiv="refresh" content="5" />
+          else
+            h3 Your doctor is #{params.doctors_array[0].name}
+
+            div(ng-controller='DrCtrl as dr')
+              button.small.secondary(ng-click='dr.joinSession()') Join Call
+              &nbsp;
+              a(href='/')
+                button.small.secondary(ng-click='dr.disconnect()') Disconnect

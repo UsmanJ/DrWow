@@ -45,18 +45,16 @@ function sendMail(emailData) {
 };
 
 router.get('/session', function (req, res) {
-    if(req.user.role === 'doctor'){
-      if(doctors_array.length === 0 || doctors_array.indexOf(req.user) !== -1) { doctors_array.push(req.user) };
-    }else if(req.user.role === 'patient'){
-      if(patients_array.length === 0 || patients_array.indexOf(req.user) !== -1) { patients_array.push(req.user) };
-    };
-
     if(req.user === undefined){
       res.redirect('/');
     } else if(req.user !== undefined){
       res.render('session', { params : { user : req.user, doctors_array : doctors_array, patients_array : patients_array }});
     };
-
+    if(req.user.role === 'doctor'){
+      if(doctors_array.length === 0 || doctors_array.indexOf(req.user) !== -1) { doctors_array.push(req.user) };
+    }else if(req.user.role === 'patient'){
+      if(patients_array.length === 0 || patients_array.indexOf(req.user) !== -1) { patients_array.push(req.user) };
+    };
 });
 
 router.get('/register', function(req, res) {

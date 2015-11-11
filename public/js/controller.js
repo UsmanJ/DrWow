@@ -31,6 +31,7 @@ drWow.controller('DrCtrl', ['$scope', 'OTSession', 'apiKey', '$http', function($
       alert("there is an error!");
     }else{
       session.publish(publisherContainer);
+      alert("The call has been initialized");
       sessionRunning = true;
       layout();
     }

@@ -31,7 +31,7 @@ block content
             #publisherContainer
           if(params.patients_array.length === 0)
             p No patients online
-            <meta http-equiv="refresh" content="10" />
+            <meta http-equiv="refresh" content="5" />
           else
             form
               .row.medium-uncollapse.large-collapse
@@ -73,7 +73,7 @@ block content
       if(params.user.role === "patient")
         if(params.doctors_array.length === 0)
           h3 No doctors online at the moment.
-          <meta http-equiv="refresh" content="10" />
+          <meta http-equiv="refresh" content="5" />
         else
           h3 Your doctor is #{params.doctors_array[0].name}
           #layoutContainer

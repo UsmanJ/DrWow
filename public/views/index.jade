@@ -28,11 +28,17 @@ block content
       h2 Welcome back #{params.user.username}
       if(params.user.role === "doctor")
         .large-12.columns
+          &nbsp;
+          a(href='/session')
+            button.small.secondary(type="button") Attend Patients
 
 
 
       if(params.user.role === "patient")
         .large-12.columns
+          &nbsp;
+          a(href='/session')
+            button.small.secondary(type="button") Speak to a Dr
 
 
   footer.row

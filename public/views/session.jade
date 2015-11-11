@@ -62,7 +62,9 @@ block content
             #publisherContainer
           div(ng-controller='DrCtrl as dr')
             button.small.secondary(ng-click='dr.joinSession()') Join Call
-            button.small.secondary(ng-click='dr.disconnect()') Disconnect
+            &nbsp;
+            a(href='/')
+              button.small.secondary(ng-click='dr.disconnect()') Disconnect
 
 
   footer.row

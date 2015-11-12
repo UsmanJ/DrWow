@@ -46,40 +46,41 @@ block content
             div(ng-controller='DrCtrl as dr')
               button.small.secondary(ng-click='dr.createSession()', ng-hide='') Create Call
               button.small.secondary(ng-click='dr.disconnect()') Disconnect
-            form
-              .row.small-uncollapse.large-uncollapse
-                .medium-6.large-4.columns
-                  label
-                    | Patient's Name
-                    input(type='text', value='#{params.patients_array[0].name}', disabled='')
-                .medium-6.large-4.columns
-                  label
-                    | Patient's Email Address
-                    input(type='text', value='#{params.patients_array[0].email}', disabled='')
-              .row.small-uncollapse.large-uncollapse
-                .medium-6.large-4.columns
-                  label
-                    | Patient's Gender
-                    input(type='text', value='#{params.patients_array[0].gender}', disabled='')
-                .medium-6.large-4.columns
-                  label
-                    | Patient's Age
-                    input(type='text', value='#{params.patients_array[0].age}', disabled='')
+            div(ng-controller='EmailCtrl')
+              form
+                .row.small-uncollapse.large-uncollapse
+                  .medium-6.large-4.columns
+                    label
+                      | Patient's Name
+                      input(type='text', ng-init='patname="#{params.patients_array[0].name}"', disabled='', ng-model="patname")
+                  .medium-6.large-4.columns
+                    label
+                      | Patient's Email Address
+                      input(type='text', ng-init='email="#{params.patients_array[0].email}"', disabled='', ng-model="email")
+                .row.small-uncollapse.large-uncollapse
+                  .medium-6.large-4.columns
+                    label
+                      | Patient's Gender
+                      input(type='text', value='#{params.patients_array[0].gender}', disabled='')
+                  .medium-6.large-4.columns
+                    label
+                      | Patient's Age
+                      input(type='text', value='#{params.patients_array[0].age}', disabled='')
 
-            .row
-              .large-12.columns
-                hr
-              .large-12.columns
-                form(role='form', action="/consultations", method="post", style='max-width: 300px;')
-                  .form-group
-                      input.form-control(type='text', name="comments", placeholder='Enter Comments', id='comments')
-                  .form-group
-                    input.form-control(type='text', name="prescription", placeholder='Prescription', id='prescription')
-                  .form-group
-                      input.form-control(type='hidden', readonly="readonly", name="doctorID", value='#{params.user._id}', id='role')
-                  .form-group
-                      input.form-control(type='hidden', readonly="readonly", name="patientID", value='#{params.patients_array[0]._id}', id='role')
-                  button.small.secondary(type='submit', id='submit') Submit
+              .row
+                .large-12.columns
+                  hr
+                .large-12.columns
+                  form(role='form', action="/consultations", method="post", style='max-width: 300px;')
+                    .form-group
+                        input.form-control(type='text', name="comments", placeholder='Enter Comments', id='comments', ng-model="message")
+                    .form-group
+                      input.form-control(type='text', name="prescription", placeholder='Prescription', ng-value="", id='prescription', ng-model="prescription")
+                    .form-group
+                        input.form-control(type='hidden', readonly="readonly", ng-init='doctorID="#{params.doctors_array[0]._id}"', id='role', ng-model="doctorID")
+                    .form-group
+                        input.form-control(type='hidden', readonly="readonly", ng-init='patientID="#{params.patients_array[0]._id}"', id='role', ng-model="patientID")
+                    button.small.secondary(type='submit', id='submit', ng-click="submitEmail();") Submit
 
     if(params.user.role === "patient")
       .row

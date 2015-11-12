@@ -169,92 +169,61 @@ block content
           ul.right.button-group
 
             li
-              a.button.small.success(href='/session') ATTEND A PATIENT
+              a.button.small.success(href='/session') PATIENT RECORDS
 
             li
-              a.button.small.success(href='#') PATIENT RECORDS
+              a.button.small.success(href='#') PHARMACIES
 
             li
-              a.button.small.success(href='#') SURGERY NEWS
+              a.button.small.success(href='#') NEWS
 
             li
               a.button.small.success(href="/logout") LOGOUT
+    br
 
 
     .row
-        .large-4.small-12.columns
-            img(src='img/img15.png', height='400', width='300')
+        .large-5.small-12.columns
+            img(src='img/img15.png')
 
             .hide-for-small.panel(align='center')
-              h3 Dr. Usman Khan
+              h3 Dr. Alex Khan
 
               h5.subheader(align='center')
                 MBBS MD(Med) MRCP(UK) MRCGP(UK)
 
             a(href='#')
-              .panel.callout.radius
-                h6 99&nbsp; items in your cart
+              .panel.callout.radius(align='center')
+                  a.button.small.success(href='/session') See your next patient
 
-                .row
-                    .large-6.columns
-                      .panel
-                        .row
-                          .large-12.columns(align='center')
-                            ul.small-block-grid-1
-                              li
-                                img(src='img/SeeDrWow.png')
-                              li
-                                a.button.small.success(href='/session') Call a Doctor
 
-          .large-8.columns
+          h3(align='center') Patients currently queuing...
+          br
+          br
+
+        .large-7.columns
+          .row
+            .small-4.small-3.columns
+              img(src='img/nikesh.jpg')
+              .panel
+                h5 Nikesh Ashar
+                h6.subheader
+
+            .small-4.small-3.columns
+              img(src='img/philip.jpg')
+              .panel
+                h5 Philip Clarke
+                h6.subheader
+
+            .small-4.small-3.columns
+              img(src='img/usman.jpg')
+              .panel
+                h5 Usman Jamil
+                h6.subheader
+
+          .large-7.columns
             .row
-              .large-4.small-6.columns
-                img(src='http://placehold.it/1000x1000&text=Thumbnail')
-
-                .panel
-                  h5 Item Name
-
-                  h6.subheader $000.00
-
-              .large-4.small-6.columns
-                img(src='http://placehold.it/500x500&text=Thumbnail')
-
-                .panel
-                  h5 Item Name
-
-                  h6.subheader $000.00
-
-              .large-4.small-6.columns
-                img(src='http://placehold.it/500x500&text=Thumbnail')
-
-                .panel
-                  h5 Item Name
-
-                  h6.subheader $000.00
-
-              .large-4.small-6.columns
-                img(src='http://placehold.it/500x500&text=Thumbnail')
-
-                .panel
-                  h5 Item Name
-
-                  h6.subheader $000.00
-
-              .large-4.small-6.columns
-                img(src='http://placehold.it/500x500&text=Thumbnail')
-
-                .panel
-                  h5 Item Name
-
-                  h6.subheader $000.00
-
-              .large-4.small-6.columns
-                img(src='http://placehold.it/500x500&text=Thumbnail')
-
-                .panel
-                  h5 Item Name
-
-                  h6.subheader $000.00
+              .small-4.small-3.columns
 
 
   footer.row

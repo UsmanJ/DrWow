@@ -24,8 +24,6 @@
     "karma-chrome-launcher": "^0.2.1",
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^0.2.1",
-    "method-override": "^2.3.5",
-    "morgan": "^1.6.1",
     "phantomjs": "^1.9.18"
   },
   "dependencies": {
@@ -39,7 +37,9 @@
     "express": "^4.13.3",
     "jade": "^1.9.1",
     "mandrill-api": "^1.0.45",
+    "method-override": "^2.3.5",
     "mongoose": "~4.2.4",
+    "morgan": "^1.6.1",
     "nodemailer-mandrill-transport": "^0.3.0",
     "opentok": "^2.3.0",
     "passport": "^0.3.0",

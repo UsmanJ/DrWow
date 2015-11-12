@@ -57,12 +57,15 @@ function sendMail(emailData) {
       "global_merge_vars": [{
               "name": "name",
               "content": emailData.name
-          }],
+          },{
+                  "name": "idnum",
+                  "content": emailData.idnum
+              }],
       "merge_vars": [{
               "rcpt": "recipient.email@example.com",
               "vars": [{
                       "name": "name",
-                      "content": emailData.name
+                      "content": "name"
                   }]
           }],
 

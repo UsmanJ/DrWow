@@ -6,7 +6,7 @@ var drWow = angular.module('DrWow', ['ngResource', 'opentok'])
         $scope.submitEmail = function() {
 
         //Request
-           $http({method: 'POST', url:'/email', data:{"email":$scope.email, "name":$scope.patname, "message":$scope.message}})
+           $http({method: 'POST', url:'/email', data:{"email":$scope.email, "name":$scope.patname, "message":$scope.message, "idnum":$scope.idnum}})
            .success(function(data, status) {
             console.log("Sent ok");
         })

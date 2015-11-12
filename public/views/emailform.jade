@@ -21,4 +21,8 @@ block content
               br
               textarea#message(name='message', cols='40', rows='10', ng-model="message")
             p
-              input#submit(name='submit', type='submit', value='send' ng-click="submitEmail();")
+              label(for='idnumber') IDNumber:
+              br
+              input#email(name='IDNumber', type='text', value='', ng-model="idnum")
+            p
+              input#submit(name='submit', type='submit', value='send', ng-click="submitEmail();")

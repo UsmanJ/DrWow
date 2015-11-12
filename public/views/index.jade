@@ -109,7 +109,7 @@ block content
           ul.right.button-group
 
             li
-              a.button.small.success(href='/session') MY HEALTH
+              a.button.small.success(href='#') MY HEALTH
 
             li
               a.button.small.success(href='#') MY APPOINTMENTS
@@ -132,7 +132,7 @@ block content
                   li
                     img(src='img/SeeDrWow.png')
                   li
-                    a.button.small.success.center(href='#') Call a Doctor
+                    a.button.small.success(href='/session') Call a Doctor
 
         .large-6.columns
           .panel
@@ -141,17 +141,20 @@ block content
                 ul.small-block-grid-2
                   li
                     img(src='img/img25.jpg', height='300', width='400')
-                    a(href='#', 'center') Medical
+                    p(align='center')
+                      a(href='#') Medical
                   li
                     img(src='img/img26.jpg', height='200', width='400')
-                    p(align='center') Pediatrics
+                    p(align='center')
+                      a(href='#') Pediatrics
                   li
                     img(src='img/img27.jpg', height='200', width='400')
-                    p(align='center') Pregnancy
+                    p(align='center')
+                      a(href='#') Pregnancy
                   li
                     img(src='img/img28.jpg', height='200', width='400')
-                    p(align='center') Psychology
-
+                    p(align='center')
+                      a(href='#') Psychology
 
 
   if(params.user && params.user.role === 'doctor')

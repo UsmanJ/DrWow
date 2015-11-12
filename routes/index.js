@@ -1,8 +1,8 @@
 var express = require('express');
 var passport = require('passport');
 var Account = require('../app/models/account');
+var Consultation = require('../app/models/consultation');
 var router = express.Router();
-var nodemailer = require("nodemailer");
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill('TrfRWARNNDbLYLENx_chjQ');
 var mandrillTransport = require('nodemailer-mandrill-transport');
@@ -147,6 +147,26 @@ router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
+
+router.post('/consultations', function(req, res) {
+
+    var consultation = new Consultation();   // create a new instance of the Consultation model
+    consultation.comments = req.body.comments;  // set the consultation description (comes from the request)
+    consultation.prescription = req.body.prescription;
+    consultation.patientID = req.body.patientID; //pass in id as string eg.JSON in request body = {"description":"TEST2", "patientID": "563a1a850d5fa4860f26d81c"}
+    consultation.doctorID = req.body.doctorID;
+
+    console.log(consultation);
+
+    // save the consultation and check for errors
+    consultation.save(function(err) {
+        if (err)
+          res.send(err);
+
+    res.redirect('/');
+
+    });
+})
 
 router.get('/ping', function(req, res){
     res.status(200).send("pong!");

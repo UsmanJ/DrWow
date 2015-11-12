@@ -76,8 +76,6 @@ block content
                   .form-group
                     input.form-control(type='text', name="prescription", placeholder='Prescription', id='prescription')
                   .form-group
-                    input.form-control(type='date', name="date", id='date')
-                  .form-group
                       input.form-control(type='hidden', readonly="readonly", name="doctorID", value='#{params.user._id}', id='role')
                   .form-group
                       input.form-control(type='hidden', readonly="readonly", name="patientID", value='#{params.patients_array[0]._id}', id='role')

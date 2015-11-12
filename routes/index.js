@@ -24,16 +24,15 @@ function isAuthenticated(req, res, next) {
 }
 
 function sendMail(emailData) {
-  console.log(emailData);
   var message = {
-      "html": emailData.message,
-      "text": emailData.message,
-      "subject": "Prescription",
+      // "html": emailData.consultation,
+      // "text": emailData.consultation,
+      "subject": "DrWow Prescription",
       "from_email": "dr@drwow.com",
       "from_name": "Dr Wow",
       "to": [{
               "email": emailData.email,
-              "name": "Recipient Name",
+              "name": emailData.name,
               "type": "to"
           }],
       "headers": {
@@ -48,7 +47,6 @@ function sendMail(emailData) {
       "url_strip_qs": null,
       "preserve_recipients": null,
       "view_content_link": null,
-      "bcc_address": "message.bcc_address@example.com",
       "tracking_domain": null,
       "signing_domain": null,
       "return_path_domain": null,
@@ -58,16 +56,22 @@ function sendMail(emailData) {
               "name": "name",
               "content": emailData.name
           },{
-                  "name": "idnum",
-                  "content": emailData.idnum
-              }],
-      "merge_vars": [{
-              "rcpt": "recipient.email@example.com",
-              "vars": [{
-                      "name": "name",
-                      "content": "name"
-                  }]
-          }],
+                  "name": "drName",
+                  "content": emailData.drName
+              },{
+                      "name": "consultation",
+                      "content": emailData.consultation
+                  },{
+                          "name": "prescription",
+                          "content": emailData.prescription
+                      }],
+      // "merge_vars": [{
+      //         "rcpt": "recipient.email@example.com",
+      //         "vars": [{
+      //                 "name": "name",
+      //                 "content": "name"
+      //             }]
+      //     }],
 
   };
   var async = false;
@@ -75,14 +79,6 @@ function sendMail(emailData) {
   var send_at = "example send_at";
   mandrill_client.messages.send({"message": message, "async": async, "ip_pool": ip_pool}, function(result) {
       console.log(result);
-      /*
-      [{
-              "email": "recipient.email@example.com",
-              "status": "sent",
-              "reject_reason": "hard-bounce",
-              "_id": "abc123abc123abc123abc123abc123"
-          }]
-      */
   }, function(e) {
       // Mandrill returns the error as an object with name and message keys
       console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
@@ -156,7 +152,7 @@ router.post('/consultations', function(req, res) {
     consultation.patientID = req.body.patientID; //pass in id as string eg.JSON in request body = {"description":"TEST2", "patientID": "563a1a850d5fa4860f26d81c"}
     consultation.doctorID = req.body.doctorID;
 
-    console.log(consultation);
+    // console.log(consultation);
 
     // save the consultation and check for errors
     consultation.save(function(err) {
@@ -170,7 +166,6 @@ router.post('/consultations', function(req, res) {
 
 router.get('/ping', function(req, res){
     res.status(200).send("pong!");
-    // console.log("got to ping !!")
 });
 
 router.get('/emailform', function(req, res){
@@ -178,15 +173,11 @@ router.get('/emailform', function(req, res){
 });
 
 router.post('/email',function(req,res){
-  // console.log(req.body.email);
   var emailTosend = req.body.email
   var emailData = req.body
   console.log(emailData);
   sendMail(emailData);
-  //  console.log("are we done here?");
-  // transport.close();
   res.redirect('/ping')
-  // server.
 });
 
 

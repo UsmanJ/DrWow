@@ -28,40 +28,42 @@ block content
     .row
         ul(data-orbit='')
             li
-                img(src='img/img1.png', height='200', width='800')
+                img(src='img/80216.jpg', height='450', width='1000')
 
               li.active
-                img(src='img/img1.png', height='200', width='800')
+                img(src='img/12736.png', height='450', width='1000')
 
               li
-                img(src='img/img1.png', height='200', width='800')
+                img(src='img/91437.jpg', height='450', width='1000')
           hr
 
-    h4(align='center') Meet Our Doctors
+        br
+
+    h4(align='center', font-) Meet Our Doctors
       br
       br
     .row
         .large-4.columns
-            img(src='img/img11.jpg', height='400', width='300')
+            img(src='img/img14.png', height='400', width='300')
             br
             br
-            h4(align='center') Dr Nikesh
+            h4(align='center') Dr. Matt Noble
             p(align='center')
                “I'm passionate about being a GP and also about using technology to improve health, so I'm thrilled to be part of the DrWow team delivering revolutionary, high quality medical care when and where it is needed. Not in the future, but right now.”
 
           .large-4.columns
-            img(src='img/img12.jpg', height='400', width='300')
+            img(src='img/img15.png', height='400', width='300')
             br
             br
-            h4(align='center') Dr Smash
+            h4(align='center') Dr. Usman Khan
             p(align='center')
                "DrWow is an innovative service for busy individuals who need to see a doctor when it suits them. To be part of this health revolution is exciting and seeing DrWow’s growth is testament to the high quality service it provides."
 
           .large-4.columns
-            img(src='img/img13.jpg', height='400', width='300')
+            img(src='img/img16.png', height='400', width='300')
             br
             br
-            h4(align='center') Dr Philip
+            h4(align='center') Dr. Martine Couteau
             p(align='center')
                "DrWow is an excellent way to get an answer to a medical question that you’ve always wanted to ask. I relish the opportunity to provide a great service to patients that is not limited by a practice boundary.”
                br
@@ -72,13 +74,14 @@ block content
 
       .row
           .large-12.columns
-              img(src='http://placehold.it/1000x400&text=Slide Image alt=slide image')
+              img(src='img/img.png', height='450', width='1000')
               br
               br
               br
 
+          hr
 
-    h4(align='center') AWARDS
+    h4(align='center') Awards
             br
             br
 
@@ -91,7 +94,9 @@ block content
 
               .large-4.columns
                   img(src='img/img10.jpg', height='200', width='200')
-
+                  br
+                  br
+                  br
 
 
   if(params.user && params.user.role === 'patient')
@@ -104,29 +109,49 @@ block content
           ul.right.button-group
 
             li
-              a.button.small.success(href='/session') SPEAK TO A DOCTOR
+              a.button.small.success(href='/session') MY HEALTH
 
             li
-              a.button.small.success(href='#') MONITOR YOUR HEALTH
+              a.button.small.success(href='#') MY APPOINTMENTS
 
             li
-              a.button.small.success(href='#') CLINICAL RECORDS
+              a.button.small.success(href='#') MY ACCOUNT
 
             li
               a.button.small.success(href="/logout") LOGOUT
           hr
+          br
+          br
 
     .row
-      .large-12.columns
-        .panel
-          h4 Get in touch!
+        .large-6.columns
+          .panel
+            .row
+              .large-12.columns(align='center')
+                ul.small-block-grid-1
+                  li
+                    img(src='img/SeeDrWow.png')
+                  li
+                    a.button.small.success.center(href='#') Call a Doctor
 
-          .row
-            .large-9.columns
-              p We&apos;d love to hear from you, you attractive person you.
+        .large-6.columns
+          .panel
+            .row
+              .large-12.columns
+                ul.small-block-grid-2
+                  li
+                    img(src='img/img25.jpg', height='300', width='400')
+                    a(href='#', 'center') Medical
+                  li
+                    img(src='img/img26.jpg', height='200', width='400')
+                    p(align='center') Pediatrics
+                  li
+                    img(src='img/img27.jpg', height='200', width='400')
+                    p(align='center') Pregnancy
+                  li
+                    img(src='img/img28.jpg', height='200', width='400')
+                    p(align='center') Psychology
 
-            .large-3.columns
-              a.button.small.success.right(href='#') CONTACT US
 
 
   if(params.user && params.user.role === 'doctor')
@@ -149,7 +174,7 @@ block content
 
             li
               a.button.small.success(href="/logout") LOGOUT
-            hr
+
 
     .row
       .large-12.columns

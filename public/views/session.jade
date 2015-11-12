@@ -73,13 +73,15 @@ block content
                 .large-12.columns
                   form(role='form', action="/consultations", method="post", style='max-width: 300px;')
                     .form-group
-                        input.form-control(type='text', name="comments", placeholder='Enter Comments', id='comments', ng-model="message")
+                        input.form-control(type='text', name="consultation", cols='40', rows='10', placeholder='Consultation', id='consultation', ng-value="", ng-model="consultation")
                     .form-group
-                      input.form-control(type='text', name="prescription", placeholder='Prescription', ng-value="", id='prescription', ng-model="prescription")
+                      input.form-control(type='text', name="prescription", cols='40', rows='10', placeholder='Prescription', ng-value="", id='prescription', ng-model="prescription")
                     .form-group
                         input.form-control(type='hidden', readonly="readonly", ng-init='doctorID="#{params.doctors_array[0]._id}"', id='role', ng-model="doctorID")
                     .form-group
                         input.form-control(type='hidden', readonly="readonly", ng-init='patientID="#{params.patients_array[0]._id}"', id='role', ng-model="patientID")
+                    .form-group
+                        input.form-control(type='hidden', readonly="readonly", ng-init='drName="#{params.doctors_array[0].name}"', id='role', ng-model="drName")
                     button.small.secondary(type='submit', id='submit', ng-click="submitEmail();") Submit
 
     if(params.user.role === "patient")

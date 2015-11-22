@@ -61,6 +61,6 @@ To run the application you can either visit it on Heroku (https://drwhoteam.hero
 
 -- or --
 
-1) Download a clone of this repo
-2) Install all node packages by running 'npm install'
-3) Run it on your localhost by entering 'node server.js' in terminal
+* Download a clone of this repo
+* Install all node packages by running 'npm install'
+* Run it on your localhost by entering 'node server.js' in terminal

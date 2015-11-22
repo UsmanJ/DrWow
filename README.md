@@ -57,9 +57,9 @@ Technologies used:
 Installation:
 ------
 
-To run the application you can either visit it on Heroku (https://drwhoteam.herokuapp.com/)
+* To run the application you can either visit it on Heroku (https://drwhoteam.herokuapp.com/)
 
--- or --
+  -- or --
 
 * Download a clone of this repo
 * Install all node packages by running 'npm install'

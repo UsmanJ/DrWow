@@ -8,14 +8,34 @@ DrWow is a web based application which allows patients to connect with doctors v
 
 For this project we used Node JS, Express, Angular JS, MongoDB, Opentok API and Mandrill API.
 
-Below are some of the main user stories of our application.
+Features:
+-------
 
-- Users can sign up as either a doctor or patient
-- Users can log in and be redirected to the appropriate portal (doctor or patient)
-- Doctors can create call sessions
-- Patients can join call sessions
-- Doctors can view patient details
-- Consultations are emailed to the patient when submitted by the doctor
+```sh
+As a user
+So that I can sign up as either a patient or doctor
+I should be able to sign up as a patient or doctor
+
+As a user
+So that I can log in
+I should be able to log in
+
+As a doctor
+So that I can speak to a patient
+I should be able to start a call session
+
+As a patient
+So that I can speak to a doctor
+I should be able to join call sessions
+
+As a doctor
+So that I can see the patients details
+I should be able to view patient details when they join my session
+
+As a user
+So that I can view my consultation
+I should be emailed my consultation once the doctor has submitted it
+```
 
 Approach towards building the application
 --------------------------------------
@@ -25,3 +45,22 @@ In order to build the application, we worked towards constructing an MVP. Starti
 Two standups were conducted daily in order to discuss the progress of the project, any additional ideas, any blocks the team could have been facing and also to ensure that all members of the team were up to date with the progress of the project.
 
 Pair programming was the route via which we built the application as it allowed knowledge to be shared efficiently and also to improve the team members communication with each other.
+
+Technologies used:
+------
+* The application was coded in JavaScript
+* Express was used for the back end
+* AngularJS was used for the front end
+* Protractor was used in order to conduct test-driven development.
+* MongoDB was used for the databases
+
+Installation:
+------
+
+To run the application you can either visit it on Heroku (https://drwhoteam.herokuapp.com/)
+
+-- or --
+
+1) Download a clone of this repo
+2) Install all node packages by running 'npm install'
+3) Run it on your localhost by entering 'node server.js' in terminal
